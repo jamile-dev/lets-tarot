@@ -139,7 +139,7 @@ func DeleteDeck(db *sql.DB, id uuid.UUID) error {
 	return err
 }
 
-func AddCardToDeck(db *sql.DB, deckID, cardID uuid.UUID) error {
+func AddCardToDeck(db *sql.DB, deckID uuid.UUID, cardID string) error {
 	_, err := db.Exec(
 		`INSERT INTO deck_cards (deck_id, card_id) VALUES ($1, $2)
 		 ON CONFLICT (deck_id, card_id) DO NOTHING`,
@@ -148,7 +148,7 @@ func AddCardToDeck(db *sql.DB, deckID, cardID uuid.UUID) error {
 	return err
 }
 
-func RemoveCardFromDeck(db *sql.DB, deckID, cardID uuid.UUID) error {
+func RemoveCardFromDeck(db *sql.DB, deckID uuid.UUID, cardID string) error {
 	_, err := db.Exec(
 		`DELETE FROM deck_cards WHERE deck_id = $1 AND card_id = $2`,
 		deckID, cardID,

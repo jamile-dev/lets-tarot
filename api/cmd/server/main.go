@@ -71,6 +71,7 @@ func main() {
 			auth.POST("/register", handlers.Register)
 			auth.POST("/login", handlers.Login)
 			auth.GET("/me", middleware.AuthRequired(cfg.JWTSecret), handlers.GetCurrentUser)
+			auth.POST("/refresh", handlers.RefreshToken)
 		}
 
 		protected := v1.Group("")

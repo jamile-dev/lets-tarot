@@ -14,6 +14,25 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// getUserID extrai o UUID do contexto de forma segura.
+func getUserID(c *gin.Context) (uuid.UUID, bool) {
+	v, exists := c.Get("user_id")
+	if !exists {
+		return uuid.Nil, false
+	}
+	switch val := v.(type) {
+	case uuid.UUID:
+		return val, val != uuid.Nil
+	case string:
+		id, err := uuid.Parse(val)
+		return id, err == nil && id != uuid.Nil
+	default:
+		return uuid.Nil, false
+	}
+}
+
+// ---- Cards (públicos) ----
+
 func GetAllCards(c *gin.Context) {
 	db, _ := c.Get("db")
 	cards, err := database.GetAllCards(db.(*sql.DB))
@@ -100,6 +119,8 @@ func GetSuits(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"suits": suits})
 }
 
+// ---- Auth ----
+
 func Register(c *gin.Context) {
 	db, _ := c.Get("db")
 	var input models.RegisterInput
@@ -121,7 +142,6 @@ func Register(c *gin.Context) {
 	}
 
 	userUUID, _ := uuid.Parse(user.ID.String())
-
 	token, err := middleware.GenerateToken(userUUID, user.Email, c.GetString("jwt_secret"))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to generate token"})
@@ -180,8 +200,12 @@ func Login(c *gin.Context) {
 
 func GetCurrentUser(c *gin.Context) {
 	db, _ := c.Get("db")
-	userID, _ := c.Get("user_id")
-	user, err := database.GetUserByID(db.(*sql.DB), userID.(uuid.UUID))
+	userID, ok := getUserID(c)
+	if !ok {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid session"})
+		return
+	}
+	user, err := database.GetUserByID(db.(*sql.DB), userID)
 	if err != nil || user == nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "user not found"})
 		return
@@ -193,10 +217,51 @@ func GetCurrentUser(c *gin.Context) {
 	})
 }
 
+func RefreshToken(c *gin.Context) {
+	var input struct {
+		Token string `json:"token"`
+	}
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if input.Token == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "token is required"})
+		return
+	}
+
+	claims := &middleware.Claims{}
+	token, err := middleware.ValidateToken(input.Token, c.GetString("jwt_secret"))
+	if err != nil || token == nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "invalid or expired token"})
+		return
+	}
+
+	newToken, err := middleware.GenerateToken(claims.UserID, claims.Email, c.GetString("jwt_secret"))
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to refresh token"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"token": newToken,
+		"user": gin.H{
+			"id":    claims.UserID.String(),
+			"email": claims.Email,
+		},
+	})
+}
+
+// ---- Decks (protegidos) ----
+
 func GetUserDecks(c *gin.Context) {
 	db, _ := c.Get("db")
-	userID, _ := c.Get("user_id")
-	decks, err := database.GetDecksByUser(db.(*sql.DB), userID.(uuid.UUID))
+	userID, ok := getUserID(c)
+	if !ok {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid session"})
+		return
+	}
+	decks, err := database.GetDecksByUser(db.(*sql.DB), userID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -206,14 +271,18 @@ func GetUserDecks(c *gin.Context) {
 
 func CreateDeck(c *gin.Context) {
 	db, _ := c.Get("db")
-	userID, _ := c.Get("user_id")
+	userID, ok := getUserID(c)
+	if !ok {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid session"})
+		return
+	}
 	var input models.CreateDeckInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	deck, err := database.CreateDeck(db.(*sql.DB), userID.(uuid.UUID), input.Name, input.Description, false)
+	deck, err := database.CreateDeck(db.(*sql.DB), userID, input.Name, input.Description, false)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -223,7 +292,11 @@ func CreateDeck(c *gin.Context) {
 
 func GetDeckByID(c *gin.Context) {
 	db, _ := c.Get("db")
-	userID, _ := c.Get("user_id")
+	userID, ok := getUserID(c)
+	if !ok {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid session"})
+		return
+	}
 	idStr := c.Param("id")
 	id, err := uuid.Parse(idStr)
 	if err != nil {
@@ -236,7 +309,7 @@ func GetDeckByID(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"error": "deck not found"})
 		return
 	}
-	if deck.UserID != userID.(uuid.UUID) {
+	if deck.UserID != userID {
 		c.JSON(http.StatusForbidden, gin.H{"error": "access denied"})
 		return
 	}
@@ -251,7 +324,11 @@ func GetDeckByID(c *gin.Context) {
 
 func UpdateDeck(c *gin.Context) {
 	db, _ := c.Get("db")
-	userID, _ := c.Get("user_id")
+	userID, ok := getUserID(c)
+	if !ok {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid session"})
+		return
+	}
 	idStr := c.Param("id")
 	id, err := uuid.Parse(idStr)
 	if err != nil {
@@ -270,7 +347,7 @@ func UpdateDeck(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	if deck.UserID != userID.(uuid.UUID) {
+	if deck.UserID != userID {
 		c.JSON(http.StatusForbidden, gin.H{"error": "access denied"})
 		return
 	}
@@ -279,7 +356,11 @@ func UpdateDeck(c *gin.Context) {
 
 func DeleteDeck(c *gin.Context) {
 	db, _ := c.Get("db")
-	userID, _ := c.Get("user_id")
+	userID, ok := getUserID(c)
+	if !ok {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid session"})
+		return
+	}
 	idStr := c.Param("id")
 	id, err := uuid.Parse(idStr)
 	if err != nil {
@@ -292,7 +373,7 @@ func DeleteDeck(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"error": "deck not found"})
 		return
 	}
-	if deck.UserID != userID.(uuid.UUID) {
+	if deck.UserID != userID {
 		c.JSON(http.StatusForbidden, gin.H{"error": "access denied"})
 		return
 	}
@@ -304,9 +385,15 @@ func DeleteDeck(c *gin.Context) {
 	c.Status(http.StatusNoContent)
 }
 
+// ---- Deck cards ----
+
 func AddCardToDeck(c *gin.Context) {
 	db, _ := c.Get("db")
-	userID, _ := c.Get("user_id")
+	userID, ok := getUserID(c)
+	if !ok {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid session"})
+		return
+	}
 	deckIDStr := c.Param("id")
 	deckID, err := uuid.Parse(deckIDStr)
 	if err != nil {
@@ -320,23 +407,18 @@ func AddCardToDeck(c *gin.Context) {
 		return
 	}
 
-	cardID, err := uuid.Parse(input.CardID)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid card id"})
-		return
-	}
-
+	// card_id é string (ex: "ar01"), não UUID
 	deck, err := database.GetDeckByID(db.(*sql.DB), deckID)
 	if err != nil || deck == nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "deck not found"})
 		return
 	}
-	if deck.UserID != userID.(uuid.UUID) {
+	if deck.UserID != userID {
 		c.JSON(http.StatusForbidden, gin.H{"error": "access denied"})
 		return
 	}
 
-	if err := database.AddCardToDeck(db.(*sql.DB), deckID, cardID); err != nil {
+	if err := database.AddCardToDeck(db.(*sql.DB), deckID, input.CardID); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -345,7 +427,11 @@ func AddCardToDeck(c *gin.Context) {
 
 func RemoveCardFromDeck(c *gin.Context) {
 	db, _ := c.Get("db")
-	userID, _ := c.Get("user_id")
+	userID, ok := getUserID(c)
+	if !ok {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid session"})
+		return
+	}
 	deckIDStr := c.Param("id")
 	deckID, err := uuid.Parse(deckIDStr)
 	if err != nil {
@@ -354,23 +440,18 @@ func RemoveCardFromDeck(c *gin.Context) {
 	}
 
 	cardIDStr := c.Param("cardId")
-	cardID, err := uuid.Parse(cardIDStr)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid card id"})
-		return
-	}
-
+	// card_id é string (ex: "ar01"), não UUID
 	deck, err := database.GetDeckByID(db.(*sql.DB), deckID)
 	if err != nil || deck == nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "deck not found"})
 		return
 	}
-	if deck.UserID != userID.(uuid.UUID) {
+	if deck.UserID != userID {
 		c.JSON(http.StatusForbidden, gin.H{"error": "access denied"})
 		return
 	}
 
-	if err := database.RemoveCardFromDeck(db.(*sql.DB), deckID, cardID); err != nil {
+	if err := database.RemoveCardFromDeck(db.(*sql.DB), deckID, cardIDStr); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -379,7 +460,11 @@ func RemoveCardFromDeck(c *gin.Context) {
 
 func GetDeckCards(c *gin.Context) {
 	db, _ := c.Get("db")
-	userID, _ := c.Get("user_id")
+	userID, ok := getUserID(c)
+	if !ok {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid session"})
+		return
+	}
 	deckIDStr := c.Param("id")
 	deckID, err := uuid.Parse(deckIDStr)
 	if err != nil {
@@ -392,7 +477,7 @@ func GetDeckCards(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"error": "deck not found"})
 		return
 	}
-	if deck.UserID != userID.(uuid.UUID) {
+	if deck.UserID != userID {
 		c.JSON(http.StatusForbidden, gin.H{"error": "access denied"})
 		return
 	}
@@ -404,10 +489,16 @@ func GetDeckCards(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"cards": cards})
 }
 
+// ---- Reviews ----
+
 func GetUserReviews(c *gin.Context) {
 	db, _ := c.Get("db")
-	userID, _ := c.Get("user_id")
-	reviews, err := database.GetReviewHistory(db.(*sql.DB), userID.(uuid.UUID), 100, 0)
+	userID, ok := getUserID(c)
+	if !ok {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid session"})
+		return
+	}
+	reviews, err := database.GetReviewHistory(db.(*sql.DB), userID, 100, 0)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -417,7 +508,11 @@ func GetUserReviews(c *gin.Context) {
 
 func CreateReview(c *gin.Context) {
 	db, _ := c.Get("db")
-	userID, _ := c.Get("user_id")
+	userID, ok := getUserID(c)
+	if !ok {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid session"})
+		return
+	}
 	var input models.CreateReviewInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -440,7 +535,7 @@ func CreateReview(c *gin.Context) {
 			return
 		}
 		deck, err := database.GetDeckByID(db.(*sql.DB), deckIDU)
-		if err != nil || deck == nil || deck.UserID != userID.(uuid.UUID) {
+		if err != nil || deck == nil || deck.UserID != userID {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "invalid deck"})
 			return
 		}
@@ -463,7 +558,7 @@ func CreateReview(c *gin.Context) {
 	nextReview := now.AddDate(0, 0, intervalDays)
 
 	review := &models.Review{
-		UserID:       userID.(uuid.UUID),
+		UserID:       userID,
 		CardID:       input.CardID,
 		DeckID:       deckID,
 		Rating:       input.Rating,
@@ -486,7 +581,11 @@ func CreateReview(c *gin.Context) {
 
 func GetDueReviews(c *gin.Context) {
 	db, _ := c.Get("db")
-	userID, _ := c.Get("user_id")
+	userID, ok := getUserID(c)
+	if !ok {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid session"})
+		return
+	}
 
 	var deckID *uuid.UUID
 	if deckIDStr := c.Query("deck_id"); deckIDStr != "" {
@@ -503,7 +602,7 @@ func GetDueReviews(c *gin.Context) {
 		}
 	}
 
-	reviews, err := database.GetDueCards(db.(*sql.DB), userID.(uuid.UUID), deckID, limit)
+	reviews, err := database.GetDueCards(db.(*sql.DB), userID, deckID, limit)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -513,7 +612,11 @@ func GetDueReviews(c *gin.Context) {
 
 func GetReviewHistory(c *gin.Context) {
 	db, _ := c.Get("db")
-	userID, _ := c.Get("user_id")
+	userID, ok := getUserID(c)
+	if !ok {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid session"})
+		return
+	}
 
 	limit := 100
 	if l := c.Query("limit"); l != "" {
@@ -529,7 +632,7 @@ func GetReviewHistory(c *gin.Context) {
 		}
 	}
 
-	reviews, err := database.GetReviewHistory(db.(*sql.DB), userID.(uuid.UUID), limit, offset)
+	reviews, err := database.GetReviewHistory(db.(*sql.DB), userID, limit, offset)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -537,14 +640,20 @@ func GetReviewHistory(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"reviews": reviews})
 }
 
+// ---- Stats ----
+
 func GetUserStats(c *gin.Context) {
 	db, _ := c.Get("db")
-	userID, _ := c.Get("user_id")
+	userID, ok := getUserID(c)
+	if !ok {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid session"})
+		return
+	}
 
-	total, _ := database.GetReviewCount(db.(*sql.DB), userID.(uuid.UUID))
-	due, _ := database.GetDueCount(db.(*sql.DB), userID.(uuid.UUID))
-	today, _ := database.GetTodayReviewCount(db.(*sql.DB), userID.(uuid.UUID))
-	streak, _ := database.GetStreak(db.(*sql.DB), userID.(uuid.UUID))
+	total, _ := database.GetReviewCount(db.(*sql.DB), userID)
+	due, _ := database.GetDueCount(db.(*sql.DB), userID)
+	today, _ := database.GetTodayReviewCount(db.(*sql.DB), userID)
+	streak, _ := database.GetStreak(db.(*sql.DB), userID)
 
 	cardsLearnt := 0
 	row := db.(*sql.DB).QueryRow(`SELECT COUNT(DISTINCT card_id) FROM reviews WHERE user_id = $1`, userID)

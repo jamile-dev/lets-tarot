@@ -8,11 +8,25 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
+// testUserID é um UUID fixo usado nos testes para injetar no contexto.
+const testUserID = "11111111-1111-1111-1111-111111111111"
+
+// setupTestEngine cria um engine de teste com rotas e um middleware que
+// injeta um user_id fake para handlers protegidos.
 func setupTestEngine() *gin.Engine {
 	gin.SetMode(gin.TestMode)
 	r := gin.New()
+
+	// Middleware que injeta user_id + db (nil) no contexto para testes.
+	r.Use(func(c *gin.Context) {
+		c.Set("user_id", uuid.MustParse(testUserID))
+		c.Set("db", nil)
+		c.Next()
+	})
+
 	r.GET("/health", HealthCheck)
 	r.GET("/api/v1/cards/search", SearchCards)
 	r.POST("/api/v1/auth/register", Register)

@@ -43,10 +43,24 @@ func AuthRequired(jwtSecret string) gin.HandlerFunc {
 			return
 		}
 
-		c.Set("user_id", claims.UserID.String())
+		c.Set("user_id", claims.UserID)
 		c.Set("email", claims.Email)
 		c.Next()
 	}
+}
+
+func ValidateToken(tokenString, jwtSecret string) (*Claims, error) {
+	claims := &Claims{}
+	token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, errors.New("unexpected signing method")
+		}
+		return []byte(jwtSecret), nil
+	})
+	if err != nil || !token.Valid {
+		return nil, err
+	}
+	return claims, nil
 }
 
 func GenerateToken(userID uuid.UUID, email, jwtSecret string) (string, error) {
