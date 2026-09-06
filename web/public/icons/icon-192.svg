@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="48" fill="#0D0D2B"/>
+  <rect x="24" y="24" width="464" height="464" rx="32" fill="none" stroke="#FF006E" stroke-width="8"/>
+  <rect x="48" y="48" width="416" height="416" rx="24" fill="#1A1A3E"/>
+  <text x="256" y="290" font-size="180" text-anchor="middle" fill="#FF006E">🎴</text>
+  <text x="256" y="360" font-size="32" text-anchor="middle" fill="#00BBF9" font-weight="900" font-family="sans-serif">LET</text>
+  <text x="256" y="396" font-size="24" text-anchor="middle" fill="#FFEA00" font-weight="700" font-family="sans-serif">TAROT</text>
+</svg>

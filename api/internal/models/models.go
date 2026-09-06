@@ -14,20 +14,6 @@ type User struct {
 	UpdatedAt    time.Time `json:"updated_at"`
 }
 
-type Card struct {
-	ID            string    `json:"id"`
-	NamePT        string    `json:"name_pt"`
-	NameShort     string    `json:"name_short"`
-	Type          string    `json:"type"` // "major" or "minor"
-	Suit          string    `json:"suit,omitempty"`
-	ValueInt      int       `json:"value_int"`
-	MeaningUpPT   string    `json:"meaning_up_pt"`
-	MeaningRevPT  string    `json:"meaning_rev_pt"`
-	DescPT        string    `json:"desc_pt,omitempty"`
-	ImageURL      string    `json:"image_url"`
-	CreatedAt     time.Time `json:"created_at"`
-}
-
 type Deck struct {
 	ID          uuid.UUID `json:"id"`
 	UserID      uuid.UUID `json:"user_id"`
@@ -68,13 +54,13 @@ type Suit struct {
 }
 
 type UserStats struct {
-	TotalReviews    int `json:"total_reviews"`
-	DueToday        int `json:"due_today"`
-	ReviewsToday    int `json:"reviews_today"`
-	CurrentStreak   int `json:"current_streak"`
-	LongestStreak   int `json:"longest_streak"`
-	CardsLearnt     int `json:"cards_learnt"`
-	AverageRating   float64 `json:"average_rating"`
+	TotalReviews  int     `json:"total_reviews"`
+	DueToday      int     `json:"due_today"`
+	ReviewsToday  int     `json:"reviews_today"`
+	CurrentStreak int     `json:"current_streak"`
+	LongestStreak int     `json:"longest_streak"`
+	CardsLearnt   int     `json:"cards_learnt"`
+	AverageRating float64 `json:"average_rating"`
 }
 
 type RegisterInput struct {
@@ -102,10 +88,10 @@ type AddCardInput struct {
 }
 
 type CreateReviewInput struct {
-	CardID  string  `json:"card_id" binding:"required"`
-	DeckID  *string `json:"deck_id"`
-	Rating  int     `json:"rating" binding:"required,min=1,max=5"`
-	Notes   string  `json:"notes"`
+	CardID string  `json:"card_id" binding:"required"`
+	DeckID *string `json:"deck_id"`
+	Rating int     `json:"rating" binding:"required,min=1,max=5"`
+	Notes  string  `json:"notes"`
 }
 
 type UserResponse struct {

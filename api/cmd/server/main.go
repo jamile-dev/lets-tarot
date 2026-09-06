@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jamile-dev/lets-tarot/api/internal/config"
@@ -17,18 +18,20 @@ func main() {
 		log.Fatalf("Failed to load config: %v", err)
 	}
 
-	db, err := database.NewPostgresDB(cfg.DSN)
+	if cfg.DSN == "" {
+		log.Println("WARNING: DATABASE_URL not set. Running in demo mode without database.")
+	}
+
+	db, err := database.NewPostgresConnection(cfg.DSN)
 	if err != nil {
-		log.Fatalf("Failed to connect to database: %v", err)
-	}
-	defer db.Close()
-
-	if err := database.Migrate(db); err != nil {
-		log.Fatalf("Failed to run migrations: %v", err)
-	}
-
-	if err := database.SeedCards(db); err != nil {
-		log.Printf("Warning: card seeding failed: %v", err)
+		log.Printf("Database connection failed (non-fatal in demo mode): %v", err)
+		db = nil
+	} else {
+		defer db.Close()
+		if err := database.Migrate(db); err != nil {
+			log.Fatalf("Failed to run migrations: %v", err)
+		}
+		database.SeedCardsOnce(db)
 	}
 
 	if os.Getenv("GIN_MODE") == "" {
@@ -38,6 +41,13 @@ func main() {
 	r := gin.New()
 	r.Use(gin.Recovery())
 	r.Use(middleware.Logger())
+
+	r.Use(func(c *gin.Context) {
+		c.Set("db", db)
+		c.Set("jwt_secret", cfg.JWTSecret)
+		c.Next()
+	})
+
 	r.Use(middleware.CORS(cfg.ClientURL))
 
 	r.GET("/health", handlers.HealthCheck)
@@ -60,7 +70,6 @@ func main() {
 		{
 			auth.POST("/register", handlers.Register)
 			auth.POST("/login", handlers.Login)
-			auth.POST("/refresh", middleware.AuthRequired(cfg.JWTSecret), handlers.RefreshToken)
 			auth.GET("/me", middleware.AuthRequired(cfg.JWTSecret), handlers.GetCurrentUser)
 		}
 
@@ -84,7 +93,14 @@ func main() {
 	}
 
 	addr := ":" + cfg.Port
-	log.Printf("Server starting on %s", addr)
+	if port := os.Getenv("PORT"); port != "" {
+		addr = ":" + port
+	}
+	if strings.HasPrefix(addr, ":") && addr[1:] == "" {
+		addr = ":8080"
+	}
+
+	log.Printf("Server starting on %s (client: %s)", addr, cfg.ClientURL)
 	if err := r.Run(addr); err != nil {
 		log.Fatalf("Failed to start server: %v", err)
 	}

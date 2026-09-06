@@ -1,0 +1,21 @@
+driver: polars
+plan: sprint
+unstaged: true
+auto:
+  stash: true
+  push: true
+  amend: false
+sign: true
+message:
+  prefix: feat
+  syntax: conventional
+  title: auto
+  body: auto
+  empty: error
+merge:
+  method: rebase
+  auto: true
+protect:
+  main: true
+  required: ci
+  branches: []

@@ -1,0 +1,347 @@
+import { useState, useEffect } from 'react'
+import type { Card, Deck } from '../types'
+import { api } from '../services/api'
+
+interface LibraryPageProps {
+  onSelectDeck?: (deckId: string) => void
+}
+
+export default function LibraryPage({ onSelectDeck }: LibraryPageProps) {
+  const [cards, setCards] = useState<Card[]>([])
+  const [decks, setDecks] = useState<Deck[]>([])
+  const [selectedDeckId, setSelectedDeckId] = useState<string | null>(null)
+  const [deckCards, setDeckCards] = useState<Card[]>([])
+  const [loading, setLoading] = useState(true)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [activeFilter, setActiveFilter] = useState<'all' | 'major' | 'minor' | 'deck'>('all')
+  const [searchResults, setSearchResults] = useState<Card[] | null>(null)
+  const [showSearch, setShowSearch] = useState(false)
+
+  useEffect(() => {
+    loadData()
+  }, [])
+
+  async function loadData() {
+    try {
+      const [cardsRes, decksRes] = await Promise.all([
+        api.getCards(),
+        api.getDecks()
+      ])
+      setCards(cardsRes.cards || [])
+      setDecks(decksRes.decks || [])
+    } catch (err) {
+      console.error('Failed to load data:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  async function handleDeckSelect(deckId: string) {
+    setSelectedDeckId(deckId)
+    setActiveFilter('deck')
+    try {
+      const res = await api.getDeck(deckId)
+      setDeckCards(res.cards || [])
+    } catch (err) {
+      console.error('Failed to load deck:', err)
+      setDeckCards([])
+    }
+  }
+
+  async function handleSearch(e: React.FormEvent) {
+    e.preventDefault()
+    if (!searchQuery.trim()) {
+      setSearchResults(null)
+      return
+    }
+    try {
+      const res = await api.searchCards(searchQuery)
+      setSearchResults(res.cards || [])
+      setShowSearch(true)
+    } catch (err) {
+      console.error('Search failed:', err)
+    }
+  }
+
+  function clearSearch() {
+    setShowSearch(false)
+    setSearchResults(null)
+    setSearchQuery('')
+    setActiveFilter('all')
+  }
+
+  const displayCards = showSearch && searchResults ? searchResults :
+    activeFilter === 'deck' ? deckCards :
+    activeFilter === 'major' ? cards.filter(c => c.type === 'major') :
+    activeFilter === 'minor' ? cards.filter(c => c.type === 'minor') :
+    cards
+
+  if (loading) {
+    return (
+      <div className="loading-screen">
+        <div className="loader"></div>
+        <p style={{ marginTop: '16px', color: 'var(--text-muted)' }}>Carregando baralho...</p>
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      <div className="page-header">
+        <h1>Biblioteca 🎴</h1>
+        <p style={{ fontSize: '16px', color: 'var(--text-muted)', maxWidth: '500px' }}>
+          Explore todas as 78 cartas do baralho Rider-Waite-Smith. Pesquise por nome ou significado.
+        </p>
+      </div>
+
+      <div style={{
+        display: 'flex',
+        gap: '12px',
+        marginBottom: '24px',
+        flexWrap: 'wrap',
+        alignItems: 'center'
+      }}>
+        <form onSubmit={handleSearch} style={{ position: 'relative', flex: '1', minWidth: '250px' }}>
+          <input
+            type="text"
+            placeholder="Pesquisar cartas..."
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            style={{
+              paddingLeft: '40px',
+              borderColor: showSearch ? 'var(--blue)' : 'var(--border)',
+              boxShadow: showSearch ? '0 0 0 3px rgba(0,187,249,0.2)' : undefined
+            }}
+          />
+          <span style={{
+            position: 'absolute',
+            left: '14px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            fontSize: '18px',
+            color: 'var(--text-muted)'
+          }}>🔍</span>
+        </form>
+
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          <FilterChip
+            label="Todas"
+            active={activeFilter === 'all' && !showSearch}
+            onClick={() => { setActiveFilter('all'); clearSearch() }}
+          />
+          <FilterChip
+            label="Arcana Maior"
+            active={activeFilter === 'major'}
+            onClick={() => { setActiveFilter('major'); clearSearch() }}
+            color="var(--purple, #9B5DE5)"
+          />
+          <FilterChip
+            label="Arcana Menor"
+            active={activeFilter === 'minor'}
+            onClick={() => { setActiveFilter('minor'); clearSearch() }}
+            color="var(--blue)"
+          />
+          {decks.length > 0 && (
+            <FilterChip
+              label="Meus baralhos"
+              active={activeFilter === 'deck'}
+              onClick={() => { setActiveFilter('deck'); clearSearch() }}
+              color="var(--green)"
+            />
+          )}
+        </div>
+      </div>
+
+      {activeFilter === 'deck' && (
+        <div className="deck-selector">
+          <label style={{ fontWeight: 700, textTransform: 'uppercase', fontSize: '14px', color: 'var(--yellow)', marginBottom: '8px', display: 'block' }}>
+            Escolha um baralho
+          </label>
+          {decks.length === 0 ? (
+            <p style={{ color: 'var(--text-muted)' }}>Você ainda não criou baralhos.</p>
+          ) : (
+            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+              {decks.map(deck => (
+                <button
+                  key={deck.id}
+                  className={`btn ${selectedDeckId === deck.id ? 'btn-primary' : 'btn-outline'}`}
+                  onClick={() => handleDeckSelect(deck.id)}
+                >
+                  {deck.name}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      <div style={{
+        marginBottom: '16px',
+        padding: '8px 16px',
+        background: 'var(--bg-card)',
+        border: '2px solid var(--border)',
+        borderRadius: 'var(--radius)',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }}>
+        <span style={{ fontWeight: 700, fontSize: '14px', textTransform: 'uppercase' }}>
+          {displayCards.length} carta{displayCards.length !== 1 ? 's' : ''}
+          {activeFilter === 'major' && ' (Arcana Maior)'}
+          {activeFilter === 'minor' && ' (Arcana Menor)'}
+          {activeFilter === 'deck' && ` (${decks.find(d => d.id === selectedDeckId)?.name || 'Baralho'})`}
+          {showSearch && ' (pesquisa)'}
+        </span>
+        {showSearch && (
+          <button className="btn btn-sm btn-outline" onClick={clearSearch}>
+            Limpar ×
+          </button>
+        )}
+      </div>
+
+      <CardGrid
+        cards={displayCards}
+        onCardClick={() => {
+          if (onSelectDeck && selectedDeckId) {
+            onSelectDeck(selectedDeckId)
+          }
+        }}
+      />
+
+      {!loading && displayCards.length === 0 && (
+        <div className="empty-state">
+          <h3>🎴 Nenhuma carta encontrada</h3>
+          <p>Tente ajustar sua pesquisa ou filtro.</p>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function FilterChip({ label, active, onClick, color }: {
+  label: string
+  active: boolean
+  onClick: () => void
+  color?: string
+}) {
+  return (
+    <button
+      className="btn btn-sm"
+      onClick={onClick}
+      style={{
+        background: active ? (color || 'var(--pink)') : 'var(--bg-elevated)',
+        color: active ? '#fff' : 'var(--text-muted)',
+        borderColor: active ? (color || 'var(--pink)') : 'var(--border)',
+        boxShadow: active ? `3px 3px 0 ${color || 'var(--pink)'}` : 'var(--shadow)',
+        minWidth: '100px',
+        textAlign: 'center'
+      }}
+    >
+      {label}
+    </button>
+  )
+}
+
+interface CardGridProps {
+  cards: Card[]
+  onCardClick?: () => void
+}
+
+function CardGrid({ cards, onCardClick }: CardGridProps) {
+  if (cards.length === 0) {
+    return (
+      <div className="empty-state">
+        <h3>🎴 Nenhuma carta encontrada</h3>
+        <p>Tente ajustar sua pesquisa ou filtro.</p>
+      </div>
+    )
+  }
+
+  return (
+    <div className="card-grid">
+      {cards.map(card => (
+        <CardItem key={card.id} card={card} onCardClick={onCardClick} />
+      ))}
+    </div>
+  )
+}
+
+interface CardItemProps {
+  card: Card
+  onCardClick?: () => void
+}
+
+function CardItem({ card, onCardClick }: CardItemProps) {
+  const [imageLoaded, setImageLoaded] = useState(false)
+
+  return (
+    <div
+      className="neobrutal-card"
+      onClick={onCardClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onCardClick?.()
+        }
+      }}
+      style={{ position: 'relative' }}
+    >
+      <div style={{
+        height: '200px',
+        background: 'var(--bg-elevated)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+        borderBottom: '3px solid var(--border)',
+        position: 'relative'
+      }}>
+        {!imageLoaded && (
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(90deg, var(--bg-elevated), var(--bg-card))',
+            zIndex: 1
+          }} />
+        )}
+        <img
+          src={`${import.meta.env.VITE_CDN_BASE_URL || 'https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards'}/${card.id}.jpg`}
+          alt={card.name_pt}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            opacity: imageLoaded ? 1 : 0,
+            transition: 'opacity 0.3s ease'
+          }}
+          onLoad={() => setImageLoaded(true)}
+          onError={() => setImageLoaded(true)}
+        />
+        {!imageLoaded && (
+          <span style={{
+            fontSize: '48px',
+            color: 'var(--text-muted)',
+            position: 'relative',
+            zIndex: 2
+          }}>
+            🎴
+          </span>
+        )}
+      </div>
+      <div style={{ padding: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
+          <h3 style={{ fontSize: '15px', marginBottom: 0, fontWeight: 700 }}>{card.name_pt}</h3>
+          <span className={`tag ${card.type === 'major' ? 'tag-major' : 'tag-minor'}`}
+            style={{ fontSize: '10px', padding: '2px 6px' }}>
+            {card.type === 'major' ? 'AM' : 'AMen'}
+          </span>
+        </div>
+        <p className="mono" style={{ fontSize: '11px', marginBottom: '6px' }}>
+          {card.id} · {card.meaning_up_pt.substring(0, 40)}...
+        </p>
+      </div>
+    </div>
+  )
+}

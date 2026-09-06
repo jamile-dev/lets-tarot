@@ -1,7 +1,6 @@
 package services
 
 import (
-	"fmt"
 	"math"
 	"time"
 
@@ -11,8 +10,6 @@ import (
 // SM-2 spaced repetition algorithm
 // Ratings: 0-5 (we use 1-5 internally, maps to Anki's 0-5 where 0-2=remembered poorly)
 func CalculateNextReview(rating int, prevInterval int, prevEase float64) (intervalDays int, easeFactor float64, nextReview time.Time) {
-	easeDelta := rating - 3 // 1->-2, 2->-1, 3->0, 4->1, 5->2
-
 	easeFactor = prevEase + (0.1 - (5.0-float64(rating))*(0.08+(5.0-float64(rating))*0.02))
 	if easeFactor < 1.3 {
 		easeFactor = 1.3
@@ -60,6 +57,7 @@ func GetReviewPriority(nextReviewAt time.Time) int {
 	return 4
 }
 
+// NewCardInterval gives initial interval for a new card based on first rating
 func NewCardInterval(rating int) int {
 	switch {
 	case rating <= 2:
@@ -85,21 +83,4 @@ func NewReviewID() uuid.UUID {
 
 func IsValidRating(rating int) bool {
 	return rating >= 1 && rating <= 5
-}
-
-func DescribeInterval(days int) string {
-	switch {
-	case days == 0:
-		return "Agora"
-	case days == 1:
-		return "1 dia"
-	case days < 30:
-		return fmt.Sprintf("%d dias", days)
-	case days < 365:
-		months := days / 30
-		return fmt.Sprintf("%d meses", months)
-	default:
-		years := days / 365
-		return fmt.Sprintf("%d anos", years)
-	}
 }
