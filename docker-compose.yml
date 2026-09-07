@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - DATABASE_URL=postgres://lets_tarot:password123@host.docker.internal:5432/lets_tarot?sslmode=disable
+      - JWT_SECRET=changeme-in-production
+      - CLIENT_URL=http://localhost:8080
+      - CDN_BASE_URL=https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: lets_tarot
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: lets_tarot
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  pgdata:
