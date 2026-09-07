@@ -1,0 +1,34 @@
+name: Deploy API to Render
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "api/**"
+      - "render.yaml"
+      - ".github/workflows/api-deploy.yml"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+
+      - name: Verify API builds
+        working-directory: api
+        run: go build -v ./cmd/server/
+
+      - name: Trigger Render deploy
+        uses: JorgeLNJunior/render-deploy@v1.5.0
+        with:
+          service_id: ${{ secrets.RENDER_SERVICE_ID }}
+          api_key: ${{ secrets.RENDER_API_KEY }}
+          wait_deploy: true
+          clear_cache: true

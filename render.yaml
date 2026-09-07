@@ -1,0 +1,37 @@
+# Lets-Tarot API on Render
+# Deploy: Connect this repo to Render → New Web Service → select this Blueprint file
+# Render auto-creates the PostgreSQL database and wires DATABASE_URL
+
+services:
+  - type: web
+    name: lets-tarot-api
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./api/Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: "8080"
+      - key: CLIENT_URL
+        value: https://jamile-dev.github.io
+      - key: CDN_BASE_URL
+        value: https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards
+      - key: DATABASE_URL
+        fromDatabase:
+          name: lets-tarot-db
+          property: connectionString
+      - key: JWT_SECRET
+        sync: false
+        # Set this in the Render Dashboard → Service → Environment → Secrets
+        # Generate a secure secret: openssl rand -base64 48
+        value: REPLACE_ME_WITH_RANDOM_SECRET_MIN_32_CHARS
+
+databases:
+  - name: lets-tarot-db
+    plan: free
+    region: oregon
+    ipAllowList:
+      - source: 0.0.0.0/0
+        description: Allow Render web service to connect

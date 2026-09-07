@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'icons/icon-192.png', 'icons/icon-512.png'],
+      includeAssets: ['favicon.svg', 'icons/icon-192.svg', 'icons/icon-512.svg'],
       manifest: {
         name: 'Lets-Tarot',
         short_name: 'Tarot+',
