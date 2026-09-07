@@ -307,7 +307,7 @@ function CardItem({ card, onCardClick }: CardItemProps) {
           }} />
         )}
         <img
-          src={`${import.meta.env.VITE_CDN_BASE_URL || 'https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards'}/${card.id}.jpg`}
+          src={`${import.meta.env.VITE_CDN_BASE_URL || 'https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards'}/${card.id}.jpg`}
           alt={card.name_pt}
           style={{
             width: '100%',

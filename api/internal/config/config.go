@@ -22,7 +22,7 @@ func Load() (*Config, error) {
 	clientURL := getEnv("CLIENT_URL", "http://localhost:5173")
 	supabaseURL := getEnv("SUPABASE_URL", "")
 	supabaseKey := getEnv("SUPABASE_ANON_KEY", "")
-	cdnBaseURL := getEnv("CDN_BASE_URL", "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards")
+	cdnBaseURL := getEnv("CDN_BASE_URL", "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards")
 
 	return &Config{
 		Port:        port,

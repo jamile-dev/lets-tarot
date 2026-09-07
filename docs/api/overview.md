@@ -202,7 +202,7 @@ GET /api/v1/users/me/stats
   "meaning_up_pt": "Habilidade, diplomacia, iniciativa...",
   "meaning_rev_pt": "Falsidade, manipulação...",
   "desc_pt": "Um jovem mago com olhos brilhantes...",
-  "image_url": "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar01.jpg"
+  "image_url": "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar01.jpg"
 }
 ```
 
