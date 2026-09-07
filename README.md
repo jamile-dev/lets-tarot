@@ -1,6 +1,6 @@
 # Lets-Tarot 🎴
 
-|> Anki-style tarot learning system — Go API + PWA, neobrutalism design, full SM-2 spaced repetition, pt-BR. Offline-first PWA deployed on GitHub Pages.</p>
+|> Anki-style tarot learning system — Go API + PWA, neobrutalism design, full SM-2 spaced repetition, pt-BR. Offline-first PWA deployed on GitHub Pages + Vercel. API live on Render.</p>
 |
 [![Deploy on Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/jamile-dev/lets-tarot)
 

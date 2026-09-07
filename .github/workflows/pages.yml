@@ -35,7 +35,7 @@ jobs:
       - name: Build PWA
         working-directory: web
         env:
-          VITE_API_URL: ${{ vars.RENDER_API_URL || 'https://lets-tarot-api.onrender.com' }}
+          VITE_API_URL: https://lets-tarot-api.onrender.com
         run: npm run build
 
       - name: Setup Pages

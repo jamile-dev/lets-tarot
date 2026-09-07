@@ -6,7 +6,7 @@
 |---|---|---|
 | API (Go/Gin) | Render | ✅ Web Service + PostgreSQL |
 | Banco | Render PostgreSQL | ✅ 256MB, 0.5 CPU |
-| PWA | GitHub Pages | ✅ Sem limites de bandwidth |
+| PWA | GitHub Pages + Vercel | ✅ Sem limites de bandwidth |
 | Imagens CDN | jsDelivr | ✅ Via GitHub Releases |
 
 ## Deploy da API no Render
@@ -16,47 +16,81 @@
 1. Acesse https://dashboard.render.com
 2. Clique em **New** → **Web Service**
 3. Conecte sua conta GitHub e selecione `jamile-dev/lets-tarot`
-4. O Render detecta o `render.yaml` (Blueprint) automaticamente
-5. Em **Environment Variables**, configure o `JWT_SECRET`:
-   ```bash
-   openssl rand -base64 48
-   ```
-6. Clique em **Create Web Service**
+4. O Render detecta o `Dockerfile` na raiz automaticamente
+5. Em **Environment Variables**, configure:
+   - `DATABASE_URL` — conexão interna do PostgreSQL do Render
+   - `JWT_SECRET` — gere com `openssl rand -base64 48`
+   - `CLIENT_URL` — URL da PWA (`https://lets-tarot-bo30kyzsm-jamile-devs-projects.vercel.app`)
+   - `CDN_BASE_URL` — `https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards`
+   - `PORT` — `8080`
 
-O Render cria:
-- Um banco PostgreSQL gratuito (`lets-tarot-db`)
-- Um serviço web (`lets-tarot-api`) com o Dockerfile multi-stage
-- O `DATABASE_URL` é injetado automaticamente
+```bash
+# Criar serviço via CLI
+render services create \
+  --name lets-tarot-api \
+  --type web \
+  --runtime docker \
+  --dockerfile-path Dockerfile \
+  --auto-deploy \
+  --branch main \
+  --repo https://github.com/jamile-dev/lets-tarot \
+  --plan free
+
+# Criar banco de dados PostgreSQL
+render postgres create --name lets-tarot-db --plan free
+
+# Obter connection string
+render pg get dpg-dafipqvqj5pc73fh11r0-a --include-sensitive-connection-info --output json
+
+# Atualizar DATABASE_URL (usar internalConnectionString)
+# Ver: https://api.render.com/v1/services/<service-id>/env-vars
+```
 
 ### 2. Verificar deploy
 
 ```bash
-# Substitua pela URL que o Render atribui (ex: https://lets-tarot-api.onrender.com)
-API_URL="https://lets-tarot-api.onrender.com"
-
-curl $API_URL/health
+# API: https://lets-tarot-api.onrender.com
+curl https://lets-tarot-api.onrender.com/health
 # {"status":"ok","service":"lets-tarot-api","timestamp":"..."}
 
-curl $API_URL/api/v1/cards/ar01 | jq '.name_pt'
+curl https://lets-tarot-api.onrender.com/api/v1/cards/ar01 | jq '.name_pt'
 # "O Mago"
+
+curl https://lets-tarot-api.onrender.com/api/v1/cards | jq '.cards | length'
+# 74
 ```
 
-### 3. Secrets do GitHub para deploy automático (opcional)
+### 3. Env vars críticas no Render
 
-Para deploys automáticos via GitHub Actions, configure estes secrets no repo:
-- `RENDER_SERVICE_ID` — ID do serviço Render (ex: `srv-abc123`)
-- `RENDER_API_KEY` — API key do Render (https://dashboard.render.com/web/apikeys)
+| Variável | Valor | Observação |
+|---|---|---|
+| `DATABASE_URL` | `postgres://...@internal-host/db?sslmode=disable` | Use internalConnectionString do Render PostgreSQL |
+| `JWT_SECRET` | `openssl rand -base64 48` | Mínimo 32 chars |
+| `CLIENT_URL` | `https://lets-tarot-bo30kyzsm-jamile-devs-projects.vercel.app` | PWA Vercel URL |
+| `CDN_BASE_URL` | `https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards` | Imagens das cartas |
+| `PORT` | `8080` | Porta do container |
+
+### 4. Notas sobre conexão DB
+
+O `lib/pq` driver tenta `sslmode=require` primeiro, e faill-back automático para `sslmode=disable` se a conexão interna do Render não suportar SSL. A conexão interna (`dpg-...`) funciona sem porta explicitamente (porta 5432 default) e sem SSL (rede interna do Render).
 
 ## Deploy do PWA no GitHub Pages
 
 O PWA já está deployado via GitHub Actions (`.github/workflows/pages.yml`).
-
 Para apontar o PWA para a API no Render, configure a variável de ambiente:
 
 1. No repositório GitHub → Settings → Variables → Actions
 2. Crie: `VITE_API_URL` = `https://lets-tarot-api.onrender.com`
 
-O workflow `pages.yml` já usa `VITE_API_URL` se definida. Se não definida, o PWA usa o fallback `https://api-lets-tarot.onrender.com`.
+O workflow `pages.yml` já usa `VITE_API_URL` se definida, senão usa o fallback `https://lets-tarot-api.onrender.com`.
+
+## Deploy do PWA no Vercel
+
+O PWA também está deployado no Vercel para hot reload e preview branches:
+- **URL**: `https://lets-tarot-bo30kyzsm-jamile-devs-projects.vercel.app`
+- **Build**: `cd web && npm ci --legacy-peer-deps && npm run build`
+- **Output**: `web/dist`
+- **Env**: `VITE_API_URL=https://lets-tarot-api.onrender.com` (via `web/.env.local`)
 
 ## Arquitetura final (produção)
 
