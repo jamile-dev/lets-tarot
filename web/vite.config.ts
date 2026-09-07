@@ -12,6 +12,7 @@ export default defineConfig({
         name: 'Lets-Tarot',
         short_name: 'Tarot+',
         description: 'Aprenda tarot com repetição espaçada. Cartas Rider-Waite-Smith em português.',
+        lang: 'pt-BR',
         theme_color: '#0D0D2B',
         background_color: '#0D0D2B',
         display: 'standalone',

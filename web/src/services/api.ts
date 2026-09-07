@@ -1,6 +1,21 @@
 import { Card, Suit, Deck, ReviewCard, Review, AuthUser, UserStats } from '../types'
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080'
+const getApiBase = (): string => {
+  // Use explicit env var if set (e.g. Vite build-time env)
+  const explicit = import.meta.env.VITE_API_URL
+  if (explicit) return explicit.trim()
+
+  // In production (GitHub Pages), point to the deployed API domain.
+  // Replace with your Render/Fly.io/whatever API URL once deployed.
+  if (import.meta.env.PROD) {
+    return 'https://api-lets-tarot.onrender.com'
+  }
+
+  // Local dev fallback
+  return 'http://localhost:8080'
+}
+
+const API_BASE = getApiBase()
 
 class ApiError extends Error {
   constructor(public status: number, message: string) {
