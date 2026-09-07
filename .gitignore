@@ -37,6 +37,7 @@ coverage/
 # Temporary
 tmp/
 temp/
+*.py
 
 # Generated (optional, keep in git if small)
 # web/public/icons/*.png
