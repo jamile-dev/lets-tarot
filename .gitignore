@@ -22,7 +22,7 @@ Thumbs.db
 *.key
 
 # Build artifacts
-api/go.sum
+# api/go.sum (kept in git for reproducible builds)
 
 # Logs
 *.log

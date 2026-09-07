@@ -1,0 +1,12 @@
+# Docker build context optimization - reduce files sent to Docker daemon
+web/node_modules/
+web/dist/
+api/bin/
+*.log
+*.tmp
+tmp/
+temp/
+.vercel
+*.swp
+*.swo
+.DS_Store
