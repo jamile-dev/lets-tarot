@@ -74,11 +74,11 @@ func InitRouter() *gin.Engine {
 
 	// Set db and jwt_secret in context for handlers
 	r.Use(func(c *gin.Context) {
-		var dbVal interface{} = cachedDB
 		if cachedDB != nil {
-			dbVal = cachedDB
+			c.Set("db", cachedDB)
+		} else {
+			c.Set("db", nil)
 		}
-		c.Set("db", dbVal)
 		c.Set("jwt_secret", cachedJWTSecret)
 		c.Next()
 	})

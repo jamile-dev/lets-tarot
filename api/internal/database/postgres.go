@@ -2,11 +2,20 @@ package database
 
 import (
 	"database/sql"
+	"strings"
 
 	_ "github.com/lib/pq"
 )
 
 func NewPostgresConnection(dsn string) (*sql.DB, error) {
+	// Ensure sslmode=require is set (needed for Render PostgreSQL)
+	if !strings.Contains(dsn, "sslmode=") {
+		if strings.Contains(dsn, "?") {
+			dsn = dsn + "&sslmode=require"
+		} else {
+			dsn = dsn + "?sslmode=require"
+		}
+	}
 	db, err := sql.Open("postgres", dsn)
 	if err != nil {
 		return nil, err
