@@ -41,3 +41,5 @@ temp/
 # Generated (optional, keep in git if small)
 # web/public/icons/*.png
 # api/cards/*.jpg
+.vercel
+.env*

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2,
+  "outputDirectory": "web/dist",
+  "build": {
+    "env": {}
+  },
+  "env": {
+    "VITE_API_URL": "https://api-lets-tarot.onrender.com"
+  }
+}

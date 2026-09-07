@@ -1,9 +1,0 @@
-{
-  "version": 3,
-  "regions": ["sfo1"],
-  "functions": {
-    "api/*.go": {
-      "runtime": "go1.x"
-    }
-  }
-}

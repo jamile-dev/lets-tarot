@@ -1,0 +1,11 @@
+# Vercel ignore patterns - prevent Go API from being detected as serverless functions
+api/cmd/
+api/internal/
+api/migrations/
+api/go.mod
+api/go.sum
+api/Dockerfile
+api/.env.example
+render.yaml
+docker-compose.yml
+docs/
