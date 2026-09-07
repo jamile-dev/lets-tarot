@@ -214,7 +214,7 @@ export default function StudyPage() {
                 display: 'flex', alignItems: 'center', justifyContent: 'center'
               }}>
                 <img
-                  src={`${import.meta.env.VITE_CDN_BASE_URL || 'https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards'}/${card.id}.jpg`}
+                  src={`${import.meta.env.VITE_CDN_BASE_URL || 'https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards'}/${card.id}.jpg`}
                   alt={card.name_pt}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   onError={e => { (e.target as HTMLImageElement).style.display = 'none' }}
@@ -237,7 +237,7 @@ export default function StudyPage() {
               </span>
             </div>
             <img
-              src={`${import.meta.env.VITE_CDN_BASE_URL || 'https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards'}/${card.id}.jpg`}
+              src={`${import.meta.env.VITE_CDN_BASE_URL || 'https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards'}/${card.id}.jpg`}
               alt={card.name_pt}
               style={{ width: '160px', height: '260px', objectFit: 'cover', border: '2px solid var(--border)', borderRadius: '4px', marginBottom: '16px' }}
               onError={e => { (e.target as HTMLImageElement).style.display = 'none' }}

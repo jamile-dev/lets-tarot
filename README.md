@@ -4,7 +4,7 @@
 
 ## Overview
 
-**Lets-Tarot** helps you learn tarot cards through spaced repetition, like Anki but for tarot. The API serves all 78 Rider-Waite-Smith cards with meanings in Portuguese, and the PWA lets you study decks, track your progress, and review cards due for revision — all offline-capable.
+**Lets-Tarot** helps you learn tarot cards through spaced repetition, like Anki but for tarot. The API serves 74 Rider-Waite-Smith cards (22 Major + 52 Minor Arcana, TaionWC deck) with meanings in Portuguese, and the PWA lets you study decks, track your progress, and review cards due for revision — all offline-capable.
 
 ## Architecture
 
@@ -72,12 +72,12 @@ npm run build      # production build to dist/
 | Method | Path | Description |
 |--------|------|-------------|
 | GET | `/api/v1/health` | Health check |
-| GET | `/api/v1/cards` | All 78 cards (pt-BR) |
-| GET | `/api/v1/cards/:id` | Single card by ID (ex: `ar01`, `cp02`, `sp10`) |
-| GET | `/api/v1/cards/random?n=5` | N random cards (max 78) |
-| GET | `/api/v1/cards/search?q=amor` | Search by name/meaning/description |
-| GET | `/api/v1/cards/major` | Only 22 Major Arcana |
-| GET | `/api/v1/cards/minor` | Only 56 Minor Arcana |
+|| GET | `/api/v1/cards` | All 74 cards (pt-BR) |
+|| GET | `/api/v1/cards/:id` | Single card by ID (ex: `ar01`, `cp02`, `sp10`) |
+|| GET | `/api/v1/cards/random?n=5` | N random cards (max 74) |
+|| GET | `/api/v1/cards/search?q=amor` | Search by name/meaning/description |
+|| GET | `/api/v1/cards/major` | Only 22 Major Arcana |
+|| GET | `/api/v1/cards/minor` | Only 52 Minor Arcana |
 | GET | `/api/v1/suits` | List suits (Paus, Copas, Espadas, Ouros) |
 
 ### Auth endpoints
@@ -121,7 +121,7 @@ Header: `Authorization: Bearer <token>`
   "meaning_up_pt": "Habilidade, diplomacia, iniciativa...",
   "meaning_rev_pt": "Falsidade, manipulação...",
   "desc_pt": "Um jovem mago com olhos brilhantes...",
-  "image_url": "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar01.jpg"
+  "image_url": "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar01.jpg"
 }
 ```
 
@@ -174,7 +174,7 @@ lets-tarot/
 │   │   ├── database/       # PostgreSQL + migrations + queries
 │   │   ├── handlers/       # HTTP handlers (cards, auth, decks, reviews)
 │   │   ├── middleware/     # Logger, CORS, JWT auth
-│   │   ├── models/         # Domain structs + 78 card data (pt-BR)
+│   │   ├── models/         # Domain structs + 74 card data (pt-BR)
 │   │   └── services/       # SM-2 spaced repetition logic
 │   ├── migrations/         # SQL migrations
 │   └── go.mod

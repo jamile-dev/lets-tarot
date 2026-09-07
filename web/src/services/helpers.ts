@@ -1,7 +1,7 @@
 import { Card, Suit } from '../types'
 
 export function getCardImageUrl(card: Card): string {
-  const cdnBase = import.meta.env.VITE_CDN_BASE_URL || 'https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards'
+  const cdnBase = import.meta.env.VITE_CDN_BASE_URL || 'https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards'
   return `${cdnBase}/${card.id}.jpg`
 }
 

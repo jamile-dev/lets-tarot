@@ -33,7 +33,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Novidade, inocência, início de jornada, espontaneidade, liberdade, potencial ilimitado, confiança na vida.",
 			MeaningRevPT: "Ações impulsivas, risco excessivo, falta de responsabilidade, instabilidade, confusão.",
 			DescPT:       "Um indivíduo com chapéu de cogumelo saltando de um penhasco com uma flor e uma bolsa. Início de jornada, confiança na vida.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar00.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar00.jpg",
 		},
 		{
 			ID:           "ar01",
@@ -44,7 +44,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Capacidade, iniciativa, vontade, recursos, energia vital, criação, poder pessoal, habilidades.",
 			MeaningRevPT: "Destruição, manipulação, perigo, recursos mal utilizados, fraude, falsidade.",
 			DescPT:       "Um mestre com ferramentas ao redor, um dedo apontando para o céu e outro para a terra. Capacidade de agir com recursos ilimitados.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar01.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar01.jpg",
 		},
 		{
 			ID:           "ar02",
@@ -55,7 +55,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Intuição, sabedoria interior, mistério, conhecimento oculto, espiritualidade, silêncio, introspecção.",
 			MeaningRevPT: "Segredos, silêncio demais, esquecimento, lack de fé, opacidade, falta de clareza.",
 			DescPT:       "Uma sacerdotisa entre dois pilaros, com um pote lunar eum livro. Intuição, sabedoria interior, mistério.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar02.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar02.jpg",
 		},
 		{
 			ID:           "ar03",
@@ -66,7 +66,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Fertilidade, abundância, natureza, crescimento, conforto, maternidade, prosperidade, beleza.",
 			MeaningRevPT: "Criatividade bloqueada, dependência, excesso de conforto, preguiça, estagnação.",
 			DescPT:       "Uma imperatriz sentada em um campo com um escudo e um corsário. Fertilidade, abundância, natureza, crescimento.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar03.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar03.jpg",
 		},
 		{
 			ID:           "ar04",
@@ -77,7 +77,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Autoridade, poder, estabilidade, controle, governança, disciplina, responsabilidade, estrutura.",
 			MeaningRevPT: "Tirania, controle excessivo, rigidez, abuso de poder, falta de adaptação, autoritarismo.",
 			DescPT:       "Um imperador sentado em um trono de pedra com um cajado de bichos. Autoridade, poder, estabilidade, controle.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar04.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar04.jpg",
 		},
 		{
 			ID:           "ar05",
@@ -88,7 +88,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Conhecimento espiritual, fé, orientação, tradicional, psicologia, ensino, sabedoria divina, compromisso.",
 			MeaningRevPT: "Dogma, ortodoxia rígida, ignorância, falta de fé, dúvida, ensino falso.",
 			DescPT:       "Um sacerdote com chaves cruzadas, representando a fé. Conhecimento espiritual, fé, orientação.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar05.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar05.jpg",
 		},
 		{
 			ID:           "ar06",
@@ -99,7 +99,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Escolha, relacionamento, união, valores, paixão, harmonia, conexão, decisão importante.",
 			MeaningRevPT: "Desunião, discordância, escolha errada, perda de valores, relacionamento tóxico.",
 			DescPT:       "Um homem e uma mulher com anjos e árvore do conhecimento. Escolha, relacionamento, união, valores.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar06.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar06.jpg",
 		},
 		{
 			ID:           "ar07",
@@ -110,7 +110,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Vitória, vontade, determinação, sucesso, confiança, controle, motivação, superação de obstáculos.",
 			MeaningRevPT: "Falta de controle, impulsividade, derrota, fracasso, desmotivação, confusão.",
 			DescPT:       "Um cavaleiro em um carro dirigido por sirenas. Vitória, vontade, determinação, sucesso, confiança.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar07.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar07.jpg",
 		},
 		{
 			ID:           "ar08",
@@ -121,7 +121,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Coragem, força interna, perseverança, fé, autocontrole, bravura, paciência, gentileza.",
 			MeaningRevPT: "Insegurança, fraqueza, perda de controle, força bruta, agressividade, pavor.",
 			DescPT:       "Uma mulher fechando a boca de um leão. Coragem, força interna, perseverança, fé.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar08.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar08.jpg",
 		},
 		{
 			ID:           "ar09",
@@ -132,7 +132,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Sabedoria interior, introspecção, isolamento, solitude, reflexão, orientação espiritual, paciência.",
 			MeaningRevPT: "Isolamento excessivo, solidão, falta de orientação, depressão, introspecção excessiva.",
 			DescPT:       "Um eremita com uma lanterna, caminhando nas montanhas. Sabedoria interior, introspecção, isolamento.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar09.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar09.jpg",
 		},
 		{
 			ID:           "ar10",
@@ -143,7 +143,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Mudança, sorte, destino, ciclos, transformação, virada de mesa, oportunidade, lição da vida.",
 			MeaningRevPT: "Má sorte, obstáculos, reversão, fracasso, estagnação, resistência à mudança.",
 			DescPT:       "Uma roda com símbolos de diferentes criaturas. Mudança, sorte, destino, ciclos, transformação.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar10.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar10.jpg",
 		},
 		{
 			ID:           "ar11",
@@ -154,7 +154,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Equilíbrio, justiça, verdade, responsabilidade, causa e efeito, honestidade, legalidade.",
 			MeaningRevPT: "Injustiça, prejuízo, culpa, indecisão, falta de responsabilidade, falsidade.",
 			DescPT:       "Uma figura com uma balança e uma espada. Equilíbrio, justiça, verdade, responsabilidade.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar11.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar11.jpg",
 		},
 		{
 			ID:           "ar12",
@@ -165,7 +165,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Sacrifício, mudança de perspectiva, paciência, libertinagem, rendição, inversão, insight.",
 			MeaningRevPT: "Medo, resistência, falta de adaptação, victimização, atadura, bloqueio.",
 			DescPT:       "Um homem invertido em uma cruz, com um disco solar atrás. Sacrifício, mudança de perspectiva, paciência.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar12.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar12.jpg",
 		},
 		{
 			ID:           "ar13",
@@ -176,7 +176,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Transformação, fim de ciclos, renovação, mudança profunda, libertação, novos começos.",
 			MeaningRevPT: "Necrose, estagnação, medo de mudança, resistência, fim sem renovação, obsolecimento.",
 			DescPT:       "Um cavaleiro com um caveira e uma bandeira preta. Transformação, fim de ciclos, renovação.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar13.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar13.jpg",
 		},
 		{
 			ID:           "ar14",
@@ -187,7 +187,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Equilíbrio, harmonia, paciência, moderação, adaptação, cura, unificação, flexibilidade.",
 			MeaningRevPT: "Excesso, desequilíbrio, falta de paciência, rigidez, procupação, desadaptação.",
 			DescPT:       "Um anjo misturando líquidos em duas taças. Equilíbrio, harmonia, paciência, moderação.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar14.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar14.jpg",
 		},
 		{
 			ID:           "ar15",
@@ -198,7 +198,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Vício, limitação, materialismo, escravidão, tentação, dependência, sombra, desejos reprimidos.",
 			MeaningRevPT: "Libertação, quebra de vícios, autonomia, desapego, amadurecimento, consciência.",
 			DescPT:       "Um diabo com mulheres encadeadas. Vício, limitação, materialismo, escravidão, tentação.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar15.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar15.jpg",
 		},
 		{
 			ID:           "ar16",
@@ -209,7 +209,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Cole instability, mudança abrupta, destruição de ilusões, revelação, caos, libertação súbita.",
 			MeaningRevPT: "Evitação de mudanças, proteção excessiva, medo de colapso, frustração, resistência alheia.",
 			DescPT:       "Uma torre sendo atingida por relâmpago com pessoas caindo. Cole instability, mudança abrupta, destruição de ilusões.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar16.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar16.jpg",
 		},
 		{
 			ID:           "ar17",
@@ -220,7 +220,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Esperança, inspiração, serenidade, fé, guia, clareza, regeneração, propósito divino.",
 			MeaningRevPT: "Desespero, falta de fé, desalinhamento, confusão, perda de direção, cinismo.",
 			DescPT:       "Uma mulher despejando água sob uma estrela. Esperança, inspiração, serenidade, fé.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar17.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar17.jpg",
 		},
 		{
 			ID:           "ar18",
@@ -231,7 +231,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Instinto, medo, ilusão, subconsciente, mistério, sonho, intuição, angústia.",
 			MeaningRevPT: "Clareza, percepção, medo superado, realidade, ilusão quebrada, consciência.",
 			DescPT:       "Uma lua com duas criaturas e um caminho entre água e cães. Instinto, medo, ilusão, subconsciente.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar18.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar18.jpg",
 		},
 		{
 			ID:           "ar19",
@@ -242,7 +242,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Alegria, sucesso, vitalidade, vida, confiança, realização, positividade, harmonia child.",
 			MeaningRevPT: "Excesso de confiança, arrogância, perda de alegria, pessimismo, falta de vitalidade.",
 			DescPT:       "Um sol brilhante com crianças e um cavalo. Alegria, sucesso, vitalidade, vida, confiança.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar19.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar19.jpg",
 		},
 		{
 			ID:           "ar20",
@@ -253,7 +253,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Renovação, transformação, chamamento, avaliação, redenção, arrependimento, juízo final.",
 			MeaningRevPT: "Negativa, falha, arrependimento, julgamento externo, procrastinação, dívida.",
 			DescPT:       "Anjos tocando trombetas com cadáveres resurrectos. Renovação, transformação, chamamento.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar20.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar20.jpg",
 		},
 		{
 			ID:           "ar21",
@@ -264,7 +264,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Conclusão, integração, realização, ciclo completo, successo, sabedoria, universo, realização pessoal.",
 			MeaningRevPT: "Incompletude, falta de conclusão, fracasso, estagnação, falta de integração.",
 			DescPT:       "Uma mulher com galho e serpente dentro de um ovillo. Conclusão, integração, realização, ciclo completo.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ar21.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar21.jpg",
 		},
 		// ===== ARCANOS MENORES (Minor Arcana) =====
 
@@ -279,7 +279,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Novas emoções, amor, felicidade, oportunidade emocional, fertilidade, resposta positiva.",
 			MeaningRevPT: "Emoções bloqueadas, amor negado, falta de entrega, frustração emocional, indiferença.",
 			DescPT:       "Um copo comeado por uma mão celeste, com uma serpente e folhas. Novas emoções, amor, felicidade.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/cp01.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/cp01.jpg",
 		},
 		{
 			ID:           "cp02",
@@ -291,7 +291,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "União, conexão, relacionamento, parceria, escolha, harmonia, troca emocional.",
 			MeaningRevPT: "Separação, disharmonia, indecisão, falta de conexão, relacionamento frágil.",
 			DescPT:       "Um homem e uma mulher trocando copos, com um vaso e bovinos. União, conexão, relacionamento, parceria.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/cp02.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/cp02.jpg",
 		},
 		{
 			ID:           "cp03",
@@ -303,7 +303,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Celebração, amizade, alegria, realização, triunfo, união, orgulho, confiança.",
 			MeaningRevPT: "Falta de alegria, celebração truncada, rivalidade, ciúme, sabotagem, melancolia.",
 			DescPT:       "Três mulheres com copos, com um cachorro. Celebração, amizade, alegria, realização.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/cp03.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/cp03.jpg",
 		},
 		{
 			ID:           "cp04",
@@ -315,7 +315,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Conforto, satisfação, reflexão, paz, contentamento, ilusão, expectativa, meditação.",
 			MeaningRevPT: "Boredom, falta de entusiasmo, insatisfação, estagnação, monotonia, autoindulgência.",
 			DescPT:       "Um homem contemplando quatro copos, com um anjo. Conforto, satisfação, reflexão, paz.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/cp04.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/cp04.jpg",
 		},
 		{
 			ID:           "cp05",
@@ -327,7 +327,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Perda emocional, tristeza, luto, desespero, abandono, frustração, solidão.",
 			MeaningRevPT: "Perda recuperada, mudança emocional, aceitação, recomposição, renovação do amor.",
 			DescPT:       "Um homem de chapéu vendido olhando para dois copos cheios, com outros vazios. Perda emocional, tristeza, luto.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/cp05.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/cp05.jpg",
 		},
 		{
 			ID:           "cp06",
@@ -339,7 +339,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Nostalgia, felicidade do passado, inocência, equilíbrio emocional, acolhimento, infância.",
 			MeaningRevPT: "Nostalgia excessiva, sentimentalismo, idealização, regressão, infelicidade passada.",
 			DescPT:       "Um homem olhando para seis copos com uma menina. Nostalgia, felicidade do passado, inocência.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/cp06.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/cp06.jpg",
 		},
 		{
 			ID:           "cp07",
@@ -351,7 +351,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Fantasia, imaginação, ilusão, sonho, ambição, escolha, desejo, irrealismo.",
 			MeaningRevPT: "Desilusão, fantasia quebrada, ambição frustrada, pesadelo, realidade implacável.",
 			DescPT:       "Um cavaleiro contemplando sete copos flutuantes com um dragão. Fantasia, imaginação, ilusão, sonho.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/cp07.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/cp07.jpg",
 		},
 		{
 			ID:           "cp08",
@@ -363,7 +363,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Busca, renovação, saída, transcendência, introspecção, abandono do passado, crescimento emocional.",
 			MeaningRevPT: "Angústia, busca frustrada, retorno, ralento, perda de direção, instabilidade.",
 			DescPT:       "Uma mulher deixando oito copos para entrar em uma cabana na floresta. Busca, renovação, saída.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/cp08.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/cp08.jpg",
 		},
 		{
 			ID:           "cp09",
@@ -375,7 +375,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Desire, realização, abundância emocional, felicidade, contentamento, luxurious, gratidão, amor pleno.",
 			MeaningRevPT: "Insatisfação, solidão, desejo inatingível, frustração, perda emocional, pessimismo.",
 			DescPT:       "Uma mulher cercada por nove copos com um servente. Desejo realizado, abundância emocional, felicidade.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/cp09.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/cp09.jpg",
 		},
 		{
 			ID:           "cp10",
@@ -387,7 +387,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Harmonia familiar, amor pleno, união, alegria doméstica, felicidade, ancestors, lares, contentamento.",
 			MeaningRevPT: "Família problemática, perda de harmonia, desunião, conflito doméstico, infelicidade.",
 			DescPT:       "Uma família debruçada em um muro de dez copos. Harmonia familiar, amor pleno, união.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/cp10.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/cp10.jpg",
 		},
 		// Copas — Cavaliere (Page)
 		{
@@ -400,7 +400,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Mensagem emocional, sensibilidade, jovem maduro, criatividade, comunicação simpática, intuição jovem.",
 			MeaningRevPT: "Mensagem emocional falha, sensibilidade excessiva, fragilidade, comunicação emocional confusa.",
 			DescPT:       "Um jovem cavaleiro com um barco à beira-mar. Mensagem emocional, sensibilidade, intuição jovem.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/cpkn.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/cpkn.jpg",
 		},
 		// Copas — Rei
 		{
@@ -413,7 +413,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Emocionalmente maduro, empático, compassivo, confiante, intuído, generoso, cheio de vida.",
 			MeaningRevPT: "Manipulador emocional, egoísta, frio, indiferente, instável emocionalmente, nemótico.",
 			DescPT:       "Um rei sentado com coppas, com uma serpente em sua mão. Emocionalmente maduro, empático, compassivo.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/cprg.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/cprg.jpg",
 		},
 		// Copas — Rainha
 		{
@@ -426,7 +426,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Intuitiva, compasionável, amorosca, atenta, calma, maternal, madura emocionalmente, acolhedora.",
 			MeaningRevPT: "Manipuladora, excessivamente sentimental, possessiva, dramática, vadia emocionalmente.",
 			DescPT:       "Uma rainha sentada com coppas, um cão, rodeada por flores. Intuitiva, compasionável, amorosca, calma.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/cprq.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/cprq.jpg",
 		},
 		// ---- ESPADAS (Swords) - Intelecto, conflito, verdades ----
 		{
@@ -439,7 +439,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Claridade mental, verdade, insight, revelação, poder da inteligência, decisão, conquista.",
 			MeaningRevPT: "Pensamento confuso, ilusão mental, falta de clareza, ingenuidade, fraqueza intelectual.",
 			DescPT:       "Uma mão entre nuvens segurando uma espada com uma rosória. Claridade mental, verdade, insight.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/sp01.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/sp01.jpg",
 		},
 		{
 			ID:           "sp02",
@@ -451,7 +451,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Decisão difícil, equilíbrio, escassez de opções, paralisia, tensão, escolha entre o mal e o pior.",
 			MeaningRevPT: "Vitória pela diplomacia, decisão tomada, resolução de conflito, neutralidade, nível heads.",
 			DescPT:       "Uma figura cega com duas espadas cruzadas, com um mar azul. Decisão difícil, equilíbrio, tensão.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/sp02.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/sp02.jpg",
 		},
 		{
 			ID:           "sp03",
@@ -463,7 +463,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Dor, tristeza, separação, luto, ferimento emocional, ruptura, perda, sofrimento.",
 			MeaningRevPT: "Recuperação, cura, superação de dor, aceitação, fim da tristeza, reconciliação.",
 			DescPT:       "Três espadas espetadas em um coração, com nuvens e chuva. Dor, tristeza, separação, luto.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/sp03.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/sp03.jpg",
 		},
 		{
 			ID:           "sp04",
@@ -475,7 +475,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Repouso, quietude, meditação, recuperação, paz mental, férias, isenção de conflitos.",
 			MeaningRevPT: "Início de nova ação, atividade mental, retorno à vida, ansiedade, agitação.",
 			DescPT:       "Uma figura de dressed de bispo com uma cruz em uma igreja, com três espadas no chão. Repouso, quietude, meditação.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/sp04.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/sp04.jpg",
 		},
 		{
 			ID:           "sp05",
@@ -487,7 +487,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Conflito, derrota, rivalidade, humilhação, injustiça, medo, inveja, ataque.",
 			MeaningRevPT: "Vitória, sucesso, reconciliação, superação, paz, libertação da rivalidade.",
 			DescPT:       "Três cavaleiros com espadas, um fugindo com uma bandeira murcha. Conflito, derrota, rivalidade, humilhação.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/sp05.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/sp05.jpg",
 		},
 		{
 			ID:           "sp06",
@@ -499,7 +499,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Transição, superação, mudança, viagem, abertura mental, passagem para o lado mais leve.",
 			MeaningRevPT: "Imobilidade, resistência à mudança, estagnação, rejeição da transição, recalque.",
 			DescPT:       "Um barco com pessoas viajando entre montanhas, com espadas cruzadas. Transição, superação, mudança.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/sp06.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/sp06.jpg",
 		},
 		{
 			ID:           "sp07",
@@ -511,7 +511,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Fraude, traição, deserção, estratégia, astúcia, invasão, medo, combate defensivo.",
 			MeaningRevPT: "Competência, estratégia bem-sucedida, vitória intelectual, honra, derrota do invasor.",
 			DescPT:       "Um homem pegando sete espadas enquanto o exército foge. Fraude, traição, estratégia, astúcia.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/sp07.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/sp07.jpg",
 		},
 		{
 			ID:           "sp08",
@@ -523,7 +523,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Limitação, restrição, crise mental, ansiedade, experiência desagradável, autoimposição.",
 			MeaningRevPT: "Libertação gradual, saída de crise, superação, aceitação da realidade externa.",
 			DescPT:       "Uma mulher amarrada com oito espadas, com um palhaço e um cubo. Limitação, restrição, ansiedade.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/sp08.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/sp08.jpg",
 		},
 		{
 			ID:           "sp09",
@@ -535,7 +535,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Ansiedade, temor, nightmare, sofrimento mental, tortura, culpa, preocupação excessiva.",
 			MeaningRevPT: "Superação do medo, realização, paz interior, fim da ansiedade, libertação mental.",
 			DescPT:       "Um homem deitado em uma cama com nove espadas na parede, olhando para um dragão. Ansiedade, temor, nightmare.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/sp09.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/sp09.jpg",
 		},
 		{
 			ID:           "sp10",
@@ -547,7 +547,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Fim, crise, desastre, agonia, fracasso, culpa, morte do pensamento, desespero.",
 			MeaningRevPT: "Recuperação, início de nova fase, aceitação do fim, libertação do sofrimento.",
 			DescPT:       "Um corpo com dez espadas no peito, olhando para o céu. Fim, crise, desastre, agonia.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/sp10.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/sp10.jpg",
 		},
 		// Espadas — Cavaliere (Page)
 		{
@@ -560,7 +560,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Mensageiro intelectual, jovem ativo, comunicação, inquietação, investigação, iniciativa mental.",
 			MeaningRevPT: "Mensagem confusa, inquietação mal direcionada, agitação, comunicação tardia, insegurança intelectual.",
 			DescPT:       "Um jovem cavaleiro com uma espada. Mensageiro intelectual, jovem ativo, comunicação.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/spkn.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/spkn.jpg",
 		},
 		// Espadas — Rei
 		{
@@ -573,7 +573,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Intelecto claro, justiça, autoridade mental, controle, honra, lógica, decisão firme.",
 			MeaningRevPT: "Controlador, frieza, crueldade, egocentrismo, ambição desmedida, falta de empatia.",
 			DescPT:       "Um rei sentado com espadas, olhos penetrantes. Intelecto claro, justiça, autoridade mental.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/sprg.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/sprg.jpg",
 		},
 		// Espadas — Rainha
 		{
@@ -586,7 +586,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Inteligência lúcida, independência, justiça, compreensão, clareza, atividade mental, coragem.",
 			MeaningRevPT: "Manipulação, desconfiança excessiva, crueldade, frieza emocional, cinismo, inveja.",
 			DescPT:       "Uma rainha sentada com espadas, um pássaro na mão. Inteligência lúcida, independência, justiça.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/sprq.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/sprq.jpg",
 		},
 		// ---- OU ROS (Pentacles) - Material, trabalho, prosperidade ----
 		{
@@ -599,7 +599,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Novo início material, riqueza, oportunidade, prosperidade, sucesso, investimento, abundância nascente.",
 			MeaningRevPT: "Perda financeira, mau investimento, estagnação, insucesso material, barreiras econômicas.",
 			DescPT:       "Uma mão celeste derramando moedas de ouro. Novo início material, riqueza, oportunidade.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ou01.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ou01.jpg",
 		},
 		{
 			ID:           "ou02",
@@ -611,7 +611,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Escolha financeira, dualidade material, equilíbrio entre trabalho e lazer, mudança de carreira.",
 			MeaningRevPT: "Instabilidade, indecisão em questões de dinheiro, confusão no trabalho, desequilíbrio financeiro.",
 			DescPT:       "Uma mulher segurando duas granadas cruzadas com seu vestido puxado. Escolha entre dois caminhos materiais.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ou02.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ou02.jpg",
 		},
 		// ---- ESPADAS (Swords) - Intelecto, conflito, verdades ----
 		// Espadas — Cavaliere (Page)
@@ -628,7 +628,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Trabalho árduo, aprendizado técnico, construção, mérito, profissão, domínio, perseverança.",
 			MeaningRevPT: "Falta de disciplina, trabalho incompleto, aprendizado interrompido, preguiça, negligência.",
 			DescPT:       "Um homem trabalhando com granadas, com uma equipe. Trabalho árduo, aprendizado técnico, construção.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ou03.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ou03.jpg",
 		},
 		{
 			ID:           "ou04",
@@ -640,7 +640,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Estabilidade financeira, planejamento, segurança material, herança, abundância, acumulação.",
 			MeaningRevPT: "Avareza, perda de oportunidades, medo de gastos, riqueza mal administrada, estagnação.",
 			DescPT:       "Um homem contemplando quatro granadas com um saco de moedas. Estabilidade financeira, planejamento.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ou04.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ou04.jpg",
 		},
 		{
 			ID:           "ou05",
@@ -652,7 +652,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Crise financeira, perda material, miséria, dedução, necessidade, falta de recursos.",
 			MeaningRevPT: "Recuperação material, auxílio financeiro, possibilidade de empréstimo, recursos vindouros.",
 			DescPT:       "Um homem pobre de chapéu vendido fora de uma igreja com cinco granadas. Crise financeira, perda material.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ou05.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ou05.jpg",
 		},
 		{
 			ID:           "ou06",
@@ -664,7 +664,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Generosidade, caridade, partilha, tributação, bem-estar financeiro, benevolência, prosperidade.",
 			MeaningRevPT: "Ganância, avareza, desequilíbrio financeiro, perda por falta de generosidade, egoísmo.",
 			DescPT:       "Um homem dando granada ao pobre, com um anel ao redor do dedo. Generosidade, caridade, partilha.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ou06.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ou06.jpg",
 		},
 		{
 			ID:           "ou07",
@@ -676,7 +676,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Trabalho árduo, aprendizado técnico, disciplina, persistência, método, estudo, mérito.",
 			MeaningRevPT: "Preguiça, fracasso, má direção, perda por negligência, falta de método.",
 			DescPT:       "Um aprendiz trabalhando em granadas com as mãos. Trabalho árduo, aprendizagem técnica, disciplina.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ou07.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ou07.jpg",
 		},
 		{
 			ID:           "ou08",
@@ -688,7 +688,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Aprendizado, trabalho árduo, desenvolvimento técnico, domínio de habilidade, perseverança, ofício.",
 			MeaningRevPT: "Falta de disciplina, educação insuficiente, fuga do trabalho, incompetência persistente.",
 			DescPT:       "Um artesão trabalhando com onze granadas. Aprendiz, trabalho manual, domínio de ofício.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ou08.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ou08.jpg",
 		},
 		{
 			ID:           "ou09",
@@ -700,7 +700,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Sucesso consolidado, riqueza, bens fruitíferos, realização do trabalho, conforto, posse de bens.",
 			MeaningRevPT: "Falha no planejamento, energia gasta em duplo, perda material recuperada, riqueza descartada.",
 			DescPT:       "Uma mulher com nove granadas ao redor de um jardim. Frutos, riqueza estável, resultado do trabalho.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ou09.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ou09.jpg",
 		},
 		{
 			ID:           "ou10",
@@ -712,7 +712,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Bem-estar material, sucessos, herança, segurança familiar, abundância consolidada, riqueza passada.",
 			MeaningRevPT: "Perda de bens, objeções no mercado, ambiente familiar problemático, gastos excessivos, falência.",
 			DescPT:       "Um homem e uma mulher com dez granadas, filhos ao redor, pedra de conforto. Sucesso total, paz familiar.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ou10.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ou10.jpg",
 		},
 		// Ouros — Cavaliere (Page)
 		{
@@ -725,7 +725,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Jovem trabalhador, empregado, empreendedor jovem, planejamento financeiro, consciência prática.",
 			MeaningRevPT:  "Jovem infrutíferas, trabalhador descuidado, indevêdrio, perda por negligência.",
 			DescPT:       "Um jovem cavaleiro com um poodle, cavalgando com uma granada ao fundo. Jovem aplicado.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/oukn.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/oukn.jpg",
 		},
 		// Ouros — Rei
 		{
@@ -738,7 +738,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Homem de negócios, governante, controlador financeiro, riqueza, estabilidade, excelência.",
 			MeaningRevPT: "Avareza, envolvimento em esquemas ilícitos, infortúnio material grave, avareza extrema.",
 			DescPT:       "Um rei com pesadas vestes, granada no peito, duas granadas à frente. O homem de autoridade e riqueza.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ourg.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ourg.jpg",
 		},
 		// Ouros — Rainha
 		{
@@ -751,7 +751,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Mulher prática, administrativa, consciência financeira, confortável, sólida, empresária.",
 			MeaningRevPT: "Mulher avara, egoísta, descuidada do lar, acumulação por medo, ganância.",
 			DescPT:       "Uma rainha sentada com granadas, vestidos bordados, um cão e um gato perto. Mulher de conforto e administração.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/ourq.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ourq.jpg",
 		},
 		// ---- PAUS (Wands) - Ação, criatividade, energia, expansão ----
 		{
@@ -764,7 +764,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Inspiração, criatividade, iniciativa, energia vital, início de projeto, impulso, ação.",
 			MeaningRevPT: "Energia bloqueada, iniciativa falha, mal-estar, criação frustrada, desalentamento.",
 			DescPT:       "Uma mão celeste derramando uma vara de pote — mesmo símbolo do Mago. Início de projeto, impulso.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/pk01.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/pk01.jpg",
 		},
 		{
 			ID:           "pk02",
@@ -776,7 +776,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Decisão de longo prazo, análise, plano de vida, escolha de futuro, equilíbrio entre visões.",
 			MeaningRevPT: "Indecisão prolongada, perda de tempo, falta de conclusão, vida estagnada.",
 			DescPT:       "Uma mulher em frente ao mar com dois varas cruzados. Decisão de longo prazo, análise.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/pk02.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/pk02.jpg",
 		},
 		{
 			ID:           "pk03",
@@ -788,7 +788,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Crescimento, expansão, trabalho em equipe, sucesso na carreira, progresso, liderança.",
 			MeaningRevPT: "Falta de arquitetura, impaciência, excesso de expansão, projeto descuidado.",
 			DescPT:       "Três varas penduradas num poste, com um homem olhando o horizonte. Construção, planejamento.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/pk03.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/pk03.jpg",
 		},
 		{
 			ID:           "pk04",
@@ -800,7 +800,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Estabilidade, conforto, festas domésticas, descanso, prosperidade pós-esforço, união de família.",
 			MeaningRevPT: "Vaidade, pedantismo, conforto que estagna, reação excessiva, festa fake.",
 			DescPT:       "Quatro varas representando as estações. Uma mesa com comida ao fundo. Celebração, conforto.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/pk04.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/pk04.jpg",
 		},
 		{
 			ID:           "pk05",
@@ -812,7 +812,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Conflito, rivalidade, luta, oposição, competição, guerra de ego, ruína do engano.",
 			MeaningRevPT: "Vitória, superação, recuo do inimigo, sucesso de xadrez, conflito superado.",
 			DescPT:       "Cinco homens com varas — luta, rivalidade. O homem aljofrado venceu três. Conflito entre poderosos.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/pk05.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/pk05.jpg",
 		},
 		{
 			ID:           "pk06",
@@ -824,7 +824,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Vitória, sucesso, superação de obstáculos, jornada, competição, auto-confiança.",
 			MeaningRevPT: "Fracasso, derrota inesperada, demora, frustração, derrota por medo.",
 			DescPT:       "Cavalheiro a cavalo, com um servo, apresentando bandeira de vitória. Vitória, sucesso, auto-confiança.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/pk06.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/pk06.jpg",
 		},
 		{
 			ID:           "pk07",
@@ -836,7 +836,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Desafio, defesa, esforço, campanha, possível vitória, triunfo do trabalho, ação defensiva.",
 			MeaningRevPT: "Derrota inesperada, desastre em campanha, recuo, inabilities para defender, abandono.",
 			DescPT:       "Um homem em alta posição com varas. Desafio, defesa, campanha, esforço.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/pk07.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/pk07.jpg",
 		},
 		{
 			ID:           "pk08",
@@ -848,7 +848,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Viagens, mudanças rápidas, ação impulsiva, movimento, caminho traçado, ir e vir.",
 			MeaningRevPT: "Viagens mal sucedidas, interrupções, fuga inútil, maus caminhos, impaciência desnecessária.",
 			DescPT:       "Oito varas se movendo por vento. Viagens, mudanças, rápida ação, impulsividade.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/pk08.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/pk08.jpg",
 		},
 		{
 			ID:           "pk09",
@@ -860,7 +860,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Desgaste, exaustão, frustração, obstáculos, recuperação lenta, empreendimentos frustrados, ansiedade.",
 			MeaningRevPT: "Coisas superadas, os inimigos são poucos, vitória position, exaustão superada.",
 			DescPT:       "Nove varas plantadas no chão, um homem com vara enfrentando um deles. Desgaste, exaustão.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/pk09.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/pk09.jpg",
 		},
 		{
 			ID:           "pk10",
@@ -872,7 +872,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Carga pesada, responsabilidade excessiva, sobrecarga, cansaço final, grandes esforços com resultado.",
 			MeaningRevPT: "Libertação parcial, desgaste menos grave, trabalho compartilhado, fuga de responsabilidades.",
 			DescPT:       "Um homem carregando dez varas sobre os ombros, quase acabando. A carga que pesa.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/pk10.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/pk10.jpg",
 		},
 		// Paus — Cavaliere (Page)
 		{
@@ -885,7 +885,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Jovem aventureiro, comerciante, criador, empreendedor, comunicador, produtivo, entusiasmado.",
 			MeaningRevPT:  "Jovem descompassado, aventureiro perigoso, inapto, comunicações falhas.",
 			DescPT:       "Um jovem cavaleiro em um cavalo branco com varas ao fundo. Viagens novidade, empreendedorismo jovem.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/pknk.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/pknk.jpg",
 		},
 		// Paus — Rei
 		{
@@ -898,7 +898,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Homem de ação, líder, empresário, comerciante, inventor, dinamismo, executivo em movimento.",
 			MeaningRevPT:  "Líder incompetente, empresário fracassado, insegurança, inaptidão profissional, tirania ineficaz.",
 			DescPT:       "Rei sentado com varas, olhos penetrantes, vestes vermelhas e pretas. Energia, ação, poder executivo.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/pkrk.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/pkrk.jpg",
 		},
 		// Paus — Rainha
 		{
@@ -911,7 +911,7 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Mulher independente, criativa, entusiasta, comunicadora, empresária, organização sem rigidez.",
 			MeaningRevPT:  "Mulher complicada, egoísta, dominadora, arrogante, exigente, mulher de ações mal direcionadas.",
 			DescPT:       "Rainha sentada com varas, cabelos ao vento. Mulher de energia, criatividade e ação.",
-			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@main/cards/pkrq.jpg",
+			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/pkrq.jpg",
 		},
 	}
 
