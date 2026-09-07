@@ -24,10 +24,7 @@ services:
           name: lets-tarot-db
           property: connectionString
       - key: JWT_SECRET
-        sync: false
-        # Set this in the Render Dashboard → Service → Environment → Secrets
-        # Generate with: openssl rand -base64 48
-        value: CHANGE_ME_RANDOM_SECRET_MIN_32_CHARS
+        generateValue: true
 
 databases:
   - name: lets-tarot-db
