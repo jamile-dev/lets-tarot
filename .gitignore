@@ -23,7 +23,6 @@ Thumbs.db
 
 # Build artifacts
 api/go.sum
-web/package-lock.json
 
 # Logs
 *.log
