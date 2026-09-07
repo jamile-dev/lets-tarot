@@ -8,21 +8,54 @@ import (
 )
 
 func NewPostgresConnection(dsn string) (*sql.DB, error) {
-	// Ensure sslmode=require is set (needed for Render PostgreSQL)
-	if !strings.Contains(dsn, "sslmode=") {
-		if strings.Contains(dsn, "?") {
-			dsn = dsn + "&sslmode=require"
+	// Normalize scheme: postgresql:// -> postgres://
+	dsn = strings.Replace(dsn, "postgresql://", "postgres://", 1)
+	
+	// Try sslmode=require first, fall back to disable if it fails
+	// This handles both external (requires SSL) and internal (may not support SSL) connections
+	var db *sql.DB
+	var err error
+	
+	sslDSN := dsn
+	if !strings.Contains(sslDSN, "sslmode=") {
+		if strings.Contains(sslDSN, "?") {
+			sslDSN = sslDSN + "&sslmode=require"
 		} else {
-			dsn = dsn + "?sslmode=require"
+			sslDSN = sslDSN + "?sslmode=require"
 		}
 	}
-	db, err := sql.Open("postgres", dsn)
+	
+	db, err = sql.Open("postgres", sslDSN)
 	if err != nil {
 		return nil, err
 	}
 	if err := db.Ping(); err != nil {
-		db.Close()
-		return nil, err
+		// If SSL connection fails with EOF, try without SSL (internal network)
+		if strings.Contains(err.Error(), "EOF") {
+			db.Close()
+			nonSSLDSN := dsn
+			if strings.Contains(nonSSLDSN, "sslmode=") {
+				nonSSLDSN = strings.ReplaceAll(nonSSLDSN, "sslmode=require", "sslmode=disable")
+				nonSSLDSN = strings.ReplaceAll(nonSSLDSN, "sslmode=prefer", "sslmode=disable")
+			} else {
+				if strings.Contains(nonSSLDSN, "?") {
+					nonSSLDSN = nonSSLDSN + "&sslmode=disable"
+				} else {
+					nonSSLDSN = nonSSLDSN + "?sslmode=disable"
+				}
+			}
+			db, err = sql.Open("postgres", nonSSLDSN)
+			if err != nil {
+				return nil, err
+			}
+			if err := db.Ping(); err != nil {
+				db.Close()
+				return nil, err
+			}
+		} else {
+			db.Close()
+			return nil, err
+		}
 	}
 	return db, nil
 }
