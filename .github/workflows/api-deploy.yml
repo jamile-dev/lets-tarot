@@ -6,8 +6,9 @@ on:
     paths:
       - "api/**"
       - "render.yaml"
-      - ".github/workflows/api-deploy.yml"
   workflow_dispatch:
+  # Deploy via webhook - triggered manually from Render dashboard
+  # or set up a deploy hook URL in Render → Service → Settings → Deploy Hooks
 
 jobs:
   deploy:
@@ -16,7 +17,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Go
+      - name: Set up Go (verify build)
         uses: actions/setup-go@v5
         with:
           go-version: "1.22"
@@ -26,9 +27,9 @@ jobs:
         run: go build -v ./cmd/server/
 
       - name: Trigger Render deploy
-        uses: JorgeLNJunior/render-deploy@v1.5.0
+        uses: render-examples/render-deploy@v1
         with:
           service_id: ${{ secrets.RENDER_SERVICE_ID }}
           api_key: ${{ secrets.RENDER_API_KEY }}
-          wait_deploy: true
+          wait_for_success: true
           clear_cache: true

@@ -1,6 +1,9 @@
 # Lets-Tarot 🎴
 
-> Anki-style tarot learning system — Go API + PWA, neobrutalism design, full SM-2 spaced repetition, pt-BR.
+|> Anki-style tarot learning system — Go API + PWA, neobrutalism design, full SM-2 spaced repetition, pt-BR. Offline-first PWA deployed on GitHub Pages.</p>
+|
+[![Deploy on Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/jamile-dev/lets-tarot)
+
 
 ## Overview
 
@@ -208,14 +211,20 @@ lets-tarot/
 
 ## Deployment
 
-See [docs/setup/deployment.md](docs/setup/deployment.md) for step-by-step guides.
+### Deploy the API (one-click)
+Click the **Deploy to Render** button at the top of this README. Render reads `render.yaml`, creates a free PostgreSQL database, builds the Docker image, and deploys the API automatically. Set `JWT_SECRET` in the Render dashboard (generate with `openssl rand -base64 48`).
+
+### Deploy the PWA
+PWA is auto-deployed to GitHub Pages on every push to `main` via `.github/workflows/pages.yml`. To point it at your deployed API, set `VITE_API_URL` as a GitHub repo variable:
+- Settings → Variables → Actions → New repository variable
+- Name: `VITE_API_URL` → Value: `https://lets-tarot-api.onrender.com` (your Render URL)
 
 ### Free Hosting Options
 
 | Component | Recommended | Alternative |
-|-----------|-------------|-------------|
-| Go API | Render (free web service) | Fly.io (free allowance) |
-| Database | Supabase (500MB + Auth) | Neon (500MB, no auth) |
+|---|---|---|
+| Go API | Render (free web service via `render.yaml`) | Fly.io (free allowance) |
+| Database | Render PostgreSQL (free tier) | Neon (500MB) |
 | PWA | GitHub Pages | Netlify |
 | Card Images | jsDelivr (GitHub Releases) | Cloudflare R2 (free 10GB) |
 

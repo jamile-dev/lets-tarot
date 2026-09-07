@@ -1,5 +1,6 @@
 # Lets-Tarot API on Render
-# Deploy: Connect this repo to Render → New Web Service → select this Blueprint file
+# Deploy with: https://render.com/deploy?repo=https://github.com/jamile-dev/lets-tarot
+# Or connect repo in Render Dashboard → New Web Service → select this Blueprint file
 # Render auto-creates the PostgreSQL database and wires DATABASE_URL
 
 services:
@@ -25,13 +26,10 @@ services:
       - key: JWT_SECRET
         sync: false
         # Set this in the Render Dashboard → Service → Environment → Secrets
-        # Generate a secure secret: openssl rand -base64 48
-        value: REPLACE_ME_WITH_RANDOM_SECRET_MIN_32_CHARS
+        # Generate with: openssl rand -base64 48
+        value: CHANGE_ME_RANDOM_SECRET_MIN_32_CHARS
 
 databases:
   - name: lets-tarot-db
     plan: free
     region: oregon
-    ipAllowList:
-      - source: 0.0.0.0/0
-        description: Allow Render web service to connect
