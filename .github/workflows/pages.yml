@@ -36,6 +36,7 @@ jobs:
         working-directory: web
         env:
           VITE_API_URL: https://lets-tarot-api.onrender.com
+          VITE_CDN_BASE_URL: https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards
         run: npm run build
 
       - name: Setup Pages

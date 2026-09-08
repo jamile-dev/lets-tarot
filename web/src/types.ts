@@ -9,6 +9,11 @@ export interface Card {
   meaning_rev_pt: string
   desc_pt?: string
   image_url: string
+  keywords_up?: string
+  keywords_rev?: string
+  astrology?: string
+  element?: string
+  crystal?: string
 }
 
 export interface Suit {

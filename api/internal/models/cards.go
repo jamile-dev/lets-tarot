@@ -18,6 +18,11 @@ type Card struct {
 	MeaningRevPT string `json:"meaning_rev_pt"`
 	DescPT       string `json:"desc_pt,omitempty"`
 	ImageURL     string `json:"image_url"`
+	KeywordsUp   string `json:"keywords_up,omitempty"`   // Palavras-chave (sentido direto)
+	KeywordsRev  string `json:"keywords_rev,omitempty"`   // Palavras-chave (sentido reverso)
+	Astrology    string `json:"astrology,omitempty"`      // Astrologia associada
+	Element      string `json:"element,omitempty"`        // Elemento (Água, Fogo, etc)
+	Crystal      string `json:"crystal,omitempty"`        // Pedra associada
 }
 
 // DefaultCards returns all 74 Rider-Waite-Smith tarot cards (TaionWC deck) with pt-BR meanings
@@ -33,6 +38,11 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Novidade, inocência, início de jornada, espontaneidade, liberdade, potencial ilimitado, confiança na vida.",
 			MeaningRevPT: "Ações impulsivas, risco excessivo, falta de responsabilidade, instabilidade, confusão.",
 			DescPT:       "Um indivíduo com chapéu de cogumelo saltando de um penhasco com uma flor e uma bolsa. Início de jornada, confiança na vida.",
+			KeywordsUp:   "Inocência, libertação, novidade, potencial, confiança, espontaneidade",
+			KeywordsRev:  "Imprudência, desatenção, risco, instabilidade, falta de direção",
+			Astrology:    "Plutão (transformação)",
+			Element:      "Fogo",
+			Crystal:      "Quartzo Claro",
 			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar00.jpg",
 		},
 		{
@@ -44,6 +54,11 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Capacidade, iniciativa, vontade, recursos, energia vital, criação, poder pessoal, habilidades.",
 			MeaningRevPT: "Destruição, manipulação, perigo, recursos mal utilizados, fraude, falsidade.",
 			DescPT:       "Um mestre com ferramentas ao redor, um dedo apontando para o céu e outro para a terra. Capacidade de agir com recursos ilimitados.",
+			KeywordsUp:   "Manifestação, poder, habilidade, comunicação, ação, criação, recursos",
+			KeywordsRev:  "Manipulation, block, fraude, esforço frustrado, falta de foco, mentira",
+			Astrology:    "Mercúrio (comunicação, mente)",
+			Element:      "Ar",
+			Crystal:      "Lapislázuli",
 			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar01.jpg",
 		},
 		{
@@ -54,7 +69,12 @@ func DefaultCards() []Card {
 			ValueInt:     2,
 			MeaningUpPT:  "Intuição, sabedoria interior, mistério, conhecimento oculto, espiritualidade, silêncio, introspecção.",
 			MeaningRevPT: "Segredos, silêncio demais, esquecimento, lack de fé, opacidade, falta de clareza.",
-			DescPT:       "Uma sacerdotisa entre dois pilaros, com um pote lunar eum livro. Intuição, sabedoria interior, mistério.",
+			DescPT:       "Uma sacerdotisa entre dois pilaros, com um poto lunar e um livro. Intuição, sabedoria interior, mistério.",
+			KeywordsUp:   "Intuição, sabedoria, mistério, subconsciente, medo, silêncio",
+			KeywordsRev:  "Ocultação, segredo, falta de clareza, medo, bloqueio, negligência",
+			Astrology:    "Lua (intuição, subconsciente)",
+			Element:      "Água",
+			Crystal:      "Quartzo Rosa",
 			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar02.jpg",
 		},
 		{
@@ -66,6 +86,11 @@ func DefaultCards() []Card {
 			MeaningUpPT:  "Fertilidade, abundância, natureza, crescimento, conforto, maternidade, prosperidade, beleza.",
 			MeaningRevPT: "Criatividade bloqueada, dependência, excesso de conforto, preguiça, estagnação.",
 			DescPT:       "Uma imperatriz sentada em um campo com um escudo e um corsário. Fertilidade, abundância, natureza, crescimento.",
+			KeywordsUp:   "Fertilidade, abundância, crescimento, natureza, abundância, prosperidade, maternidade",
+			KeywordsRev:  "Estagnação, dependência, bloqueio criativo, preguiça, excesso de conforto, materialismo",
+			Astrology:    "Vênus (amor, beleza, abundância)",
+			Element:      "Terra",
+			Crystal:      "Esmeralda",
 			ImageURL:     "https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards/ar03.jpg",
 		},
 		{

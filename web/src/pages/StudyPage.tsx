@@ -33,6 +33,9 @@ export default function StudyPage() {
   const progress = cardsToStudy.length > 0
     ? `${currentIndex + 1} / ${cardsToStudy.length}`
     : '0 / 0'
+  const progressPercent = cardsToStudy.length > 0
+    ? ((currentIndex / cardsToStudy.length) * 100)
+    : 0
 
   useEffect(() => {
     loadData()
@@ -106,6 +109,12 @@ export default function StudyPage() {
     }
   }, [currentCard, currentIndex, cardsToStudy.length])
 
+  const handleFlipBack = useCallback(() => {
+    setFlipped(false)
+    setSelectedRating(0)
+    setShowRating(false)
+  }, [])
+
   async function handleRestart() {
     setCurrentIndex(0)
     setFlipped(false)
@@ -119,22 +128,28 @@ export default function StudyPage() {
     return (
       <div className="loading-screen">
         <div className="loader"></div>
-        <p>Preparando sessão...</p>
+        <p>Preparando sessão de estudo...</p>
       </div>
     )
   }
 
   if (error) {
     return (
-      <div>
+      <div className="study-container">
         <div className="page-header">
           <h1>Estudar 🎴</h1>
         </div>
-        <div className="empty-state">
+        <div className="empty-state" role="alert">
           <h3>⚠️ {error}</h3>
-          <button className="btn btn-primary" onClick={() => navigate('/library')}>
-            Voltar à Biblioteca
-          </button>
+          <div className="study-footer">
+            <button
+              className="btn btn-primary btn-lg"
+              onClick={() => navigate('/library')}
+              aria-label="Voltar à biblioteca"
+            >
+              Voltar à Biblioteca
+            </button>
+          </div>
         </div>
       </div>
     )
@@ -142,7 +157,7 @@ export default function StudyPage() {
 
   if (cardsToStudy.length === 0) {
     return (
-      <div>
+      <div className="study-container">
         <div className="page-header">
           <h1>Estudar 🎴</h1>
           <p>
@@ -162,11 +177,17 @@ export default function StudyPage() {
                   navigate('/library')
                 }
               }}
+              aria-label="Criar primeiro baralho"
             >
               ✨ Criar baralho
             </button>
-            <button className="btn btn-outline" onClick={() => navigate('/library')}>📚 Biblioteca</button>
-            <button className="btn btn-outline" onClick={handleRestart}>🔄 Recarregar</button>
+            <button
+              className="btn btn-outline"
+              onClick={() => navigate('/library')}
+              aria-label="Ir para biblioteca"
+            >
+              📚 Biblioteca
+            </button>
           </div>
         </div>
       </div>
@@ -177,31 +198,46 @@ export default function StudyPage() {
 
   return (
     <div className="study-container">
+      {/* Progress Header */}
       <div className="study-progress-header">
-        <span className="card-name">{card.name_pt}</span>
-        <span className="progress mono">{progress}</span>
+        <div className="progress-left">
+          <span className="progress mono" aria-label={`Progresso: ${progress}`}>
+            {progress}
+          </span>
+          <span className="progress-label" aria-hidden="true">de cartas estudadas</span>
+        </div>
+        <div className="progress-right">
+          <span className="card-name" aria-label={`Carta atual: ${card.name_pt}`}>
+            {card.name_pt}
+          </span>
+        </div>
       </div>
 
+      {/* Progress Bar */}
       <div className="progress-bar">
         <div
           className="progress-bar-fill"
-          style={{
-            width: `${(currentIndex / cardsToStudy.length) * 100}%`
-          }}
+          style={{ width: `${progressPercent}%` }}
+          role="progressbar"
+          aria-valuenow={progressPercent}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label="Progresso da sessão"
         />
       </div>
 
+      {/* Card Flip Area */}
       <div className="study-card-back-wrapper">
         <div
           className={`study-card-flip ${flipped ? 'flipped' : ''}`}
         >
+          {/* Card Back (Question) */}
           <div
-            className="study-card study-card-back"
-            style={{ opacity: flipped ? 0 : 1 }}
+            className={`study-card study-card-back ${flipped ? 'flipped-away' : ''}`}
             onClick={handleFlip}
             role="button"
             tabIndex={0}
-            aria-label="Clique para revelar a carta"
+            aria-label="Clique ou pressione Enter para revelar a carta"
             onKeyDown={e => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault()
@@ -209,57 +245,106 @@ export default function StudyPage() {
               }
             }}
           >
-            <span className="card-back-pattern">🎴</span>
-            <h3>{card.name_pt}</h3>
-            <span
-              className="tap-hint"
-            >
-              🔄 Toque para revelar
-            </span>
-            <div className="card-placeholder-container">
-              <img
-                src={`${import.meta.env.VITE_CDN_BASE_URL || 'https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards'}/${card.id}.jpg`}
-                alt={card.name_pt}
-                className="card-placeholder-img"
-                onError={e => { (e.target as HTMLImageElement).style.display = 'none' }}
-              />
+            <div className="card-back-content">
+              <span className="card-back-pattern" aria-hidden="true">🎴</span>
+              <h3 className="card-back-title">{card.name_pt}</h3>
+              <span className="tap-hint">
+                🔄 Toque para revelar
+              </span>
+              <div className="card-placeholder-container">
+                <img
+                  src={`${import.meta.env.VITE_CDN_BASE_URL || 'https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards'}/${card.id}.jpg`}
+                  alt={card.name_pt}
+                  className="card-placeholder-img"
+                  onError={e => { (e.target as HTMLImageElement).style.display = 'none' }}
+                />
+              </div>
             </div>
           </div>
 
-          <div
-            className="study-card study-card-front"
-          >
+          {/* Card Front (Answer) */}
+          <div className="study-card study-card-front">
             <div className="card-header">
               <h2>{card.name_pt}</h2>
               <span className={`tag ${card.type === 'major' ? 'tag-major' : 'tag-minor'}`}>
                 {card.type === 'major' ? 'Arcano Maior' : `Arcano Menor · ${card.suit || ''}`}
               </span>
             </div>
+
             <img
               src={`${import.meta.env.VITE_CDN_BASE_URL || 'https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards'}/${card.id}.jpg`}
               alt={card.name_pt}
               className="study-card-img"
               onError={e => { (e.target as HTMLImageElement).style.display = 'none' }}
             />
-            <div className="meaning">
-              <strong>⬆️ Sentido direto</strong>
-              {card.meaning_up_pt}
+
+            {/* Card Info Grid — inspired by Labyrinthos/ Trusted Tarot layout */}
+            <div className="card-info-grid">
+              <div className="card-info-section">
+                <h4>Sentido direto ⬆️</h4>
+                <p className="meaning-text">{card.meaning_up_pt}</p>
+                {card.keywords_up && (
+                  <div className="card-keywords">
+                    <strong>Palavras-chave:</strong> {card.keywords_up}
+                  </div>
+                )}
+              </div>
+
+              <div className="card-info-section">
+                <h4>Sentido reverso ⬇️</h4>
+                <p className="meaning-rev-text">{card.meaning_rev_pt}</p>
+                {card.keywords_rev && (
+                  <div className="card-keywords card-keywords-rev">
+                    <strong>Palavras-chave:</strong> {card.keywords_rev}
+                  </div>
+                )}
+              </div>
+
+              {/* Metadata section — astrology, element, crystal */}
+              {(card.astrology || card.element || card.crystal) && (
+                <div className="card-metadata">
+                  <h4>Meta • Info</h4>
+                  <div className="metadata-grid">
+                    {card.element && (
+                      <div className="metadata-item">
+                        <span className="metadata-label">Elemento</span>
+                        <span className="metadata-value">{card.element}</span>
+                      </div>
+                    )}
+                    {card.astrology && (
+                      <div className="metadata-item">
+                        <span className="metadata-label">Astrologia</span>
+                        <span className="metadata-value">{card.astrology}</span>
+                      </div>
+                    )}
+                    {card.crystal && (
+                      <div className="metadata-item">
+                        <span className="metadata-label">Pedra</span>
+                        <span className="metadata-value">{card.crystal}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {card.desc_pt && (
+                <div className="card-description-section">
+                  <h4>Descrição</h4>
+                  <p className="card-description-text">{card.desc_pt}</p>
+                </div>
+              )}
             </div>
-            <div className="meaning-rev">
-              <strong>⬇️ Sentido reverso</strong>
-              {card.meaning_rev_pt}
-            </div>
-            {card.desc_pt && (
-              <p className="card-description">
-                {card.desc_pt.substring(0, 200)}{card.desc_pt.length > 200 && '...'}
-              </p>
-            )}
           </div>
         </div>
       </div>
 
+      {/* Rating Section */}
       {showRating && (
-        <div className="rating-section">
+        <div
+          className="rating-section"
+          role="group"
+          aria-label="Avalie seu conhecimento desta carta"
+        >
           <p className="rating-prompt">Quão bem você lembra o significado?</p>
           <div className="rating-dots">
             {[1, 2, 3, 4, 5].map(r => (
@@ -281,10 +366,11 @@ export default function StudyPage() {
         </div>
       )}
 
+      {/* Session Stats */}
       {sessionCount > 0 && (
         <div className="study-stats">
           <div className="stat-card">
-            <div className="stat-value" style={{ color: 'var(--green)' }}>{sessionCount}</div>
+            <div className="stat-value" style={{ color: 'var(--gold)' }}>{sessionCount}</div>
             <div className="stat-label">revisado(s)</div>
           </div>
           <div className="stat-card">
@@ -296,10 +382,37 @@ export default function StudyPage() {
         </div>
       )}
 
+      {/* Study Footer */}
       <div className="study-footer">
-        <button className="btn btn-primary btn-lg" onClick={handleRestart}>🔄 Nova sessão</button>
-        <button className="btn btn-secondary btn-lg" onClick={() => navigate('/library')}>📚 Biblioteca</button>
-        <button className="btn btn-outline btn-lg" onClick={() => navigate('/stats')}>📊 Estatísticas</button>
+        <button
+          className="btn btn-outline btn-lg"
+          onClick={handleFlipBack}
+          disabled={flipped}
+          aria-label="Mostrar verso da carta"
+        >
+          🔄 Repescar carta
+        </button>
+        <button
+          className="btn btn-primary btn-lg"
+          onClick={handleRestart}
+          aria-label="Nova sessão de estudo"
+        >
+          🔄 Nova sessão
+        </button>
+        <button
+          className="btn btn-secondary btn-lg"
+          onClick={() => navigate('/library')}
+          aria-label="Voltar para a biblioteca"
+        >
+          📚 Biblioteca
+        </button>
+        <button
+          className="btn btn-outline btn-lg"
+          onClick={() => navigate('/stats')}
+          aria-label="Ver estatísticas"
+        >
+          📊 Estatísticas
+        </button>
       </div>
     </div>
   )
