@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { api, ApiError } from '../services/api'
+import { useAuth } from '../hooks/useAuth'
 
 export default function LoginPage() {
   const navigate = useNavigate()
+  const { login } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -15,10 +16,10 @@ export default function LoginPage() {
     setError(null)
 
     try {
-      await api.login(email, password)
+      await login(email, password)
       navigate('/library')
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : 'Erro ao fazer login')
+      setError(err instanceof Error ? err.message : 'Erro ao fazer login')
     } finally {
       setLoading(false)
     }
@@ -74,6 +75,7 @@ export default function LoginPage() {
               placeholder="••••••••"
               autoComplete="current-password"
               required
+              minLength={8}
             />
           </div>
 

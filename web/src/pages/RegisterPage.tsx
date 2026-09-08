@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { api, ApiError } from '../services/api'
+import { useAuth } from '../hooks/useAuth'
 
 export default function RegisterPage() {
   const navigate = useNavigate()
+  const { register } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -26,11 +27,11 @@ export default function RegisterPage() {
     setError(null)
 
     try {
-      await api.register(email, password)
+      await register(email, password)
       setSuccess(true)
       setTimeout(() => navigate('/library'), 1500)
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : 'Erro ao criar conta')
+      setError(err instanceof Error ? err.message : 'Erro ao criar conta')
     } finally {
       setLoading(false)
     }
