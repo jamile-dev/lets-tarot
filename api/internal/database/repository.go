@@ -102,7 +102,7 @@ func GetDecksByUser(db *sql.DB, userID uuid.UUID) ([]models.Deck, error) {
 	}
 	defer rows.Close()
 
-	var decks []models.Deck
+	decks := []models.Deck{}
 	for rows.Next() {
 		var d models.Deck
 		if err := rows.Scan(&d.ID, &d.UserID, &d.Name, &d.Description, &d.IsDefault, &d.CreatedAt, &d.UpdatedAt); err != nil {
@@ -173,7 +173,7 @@ func GetDeckCards(db *sql.DB, deckID uuid.UUID) ([]models.Card, error) {
 	}
 	defer rows.Close()
 
-	var cards []models.Card
+	cards := []models.Card{}
 	for rows.Next() {
 		var c models.Card
 		if err := rows.Scan(&c.ID, &c.NamePT, &c.NameShort, &c.Type, &c.Suit, &c.ValueInt,
@@ -226,7 +226,7 @@ func GetDueCards(db *sql.DB, userID uuid.UUID, deckID *uuid.UUID, limit int) ([]
 	}
 	defer rows.Close()
 
-	var reviews []models.ReviewCard
+	reviews := []models.ReviewCard{}
 	for rows.Next() {
 		var rc models.ReviewCard
 		var deckIDStr sql.NullString
@@ -262,7 +262,7 @@ func GetReviewHistory(db *sql.DB, userID uuid.UUID, limit, offset int) ([]models
 	}
 	defer rows.Close()
 
-	var reviews []models.ReviewCard
+	reviews := []models.ReviewCard{}
 	for rows.Next() {
 		var rc models.ReviewCard
 		var deckIDStr sql.NullString
@@ -427,7 +427,7 @@ func filterCards(db *sql.DB, cardType string, offset, limit int) ([]models.Card,
 	}
 	defer rows.Close()
 
-	var cards []models.Card
+	cards := []models.Card{}
 	for rows.Next() {
 		var c models.Card
 		if err := rows.Scan(&c.ID, &c.NamePT, &c.NameShort, &c.Type, &c.Suit, &c.ValueInt,
@@ -488,7 +488,7 @@ func SearchCards(db *sql.DB, query string) ([]models.Card, error) {
 	}
 	defer rows.Close()
 
-	var cards []models.Card
+	cards := []models.Card{}
 	for rows.Next() {
 		var c models.Card
 		if err := rows.Scan(&c.ID, &c.NamePT, &c.NameShort, &c.Type, &c.Suit, &c.ValueInt,
@@ -511,7 +511,7 @@ func GetRandomCards(db *sql.DB, count int) ([]models.Card, error) {
 	}
 	defer rows.Close()
 
-	var cards []models.Card
+	cards := []models.Card{}
 	for rows.Next() {
 		var c models.Card
 		if err := rows.Scan(&c.ID, &c.NamePT, &c.NameShort, &c.Type, &c.Suit, &c.ValueInt,

@@ -144,12 +144,31 @@ export default function StudyPage() {
         <div className="page-header">
           <h1>Estudiar 🎴</h1>
           <p style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
-            {deckId ? 'Sem cartas pendentes.' : 'Sem cartas para estudar.'}
+            {deckId ? 'Sem cartas pendentes neste baralho.' : 'Nenhum baralho selecionado.'}
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginTop: '24px' }}>
-          <button className="btn btn-primary" onClick={handleRestart}>🔄 Reiniciar</button>
-          <button className="btn btn-outline" onClick={() => navigate('/library')}>📚 Biblioteca</button>
+        <div className="empty-state" style={{ padding: '40px', textAlign: 'center' }}>
+          <h3>📚 Nenhum baralho para estudar</h3>
+          <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>
+            Crie um baralho na biblioteca para começar a revisar.
+          </p>
+          <button
+            className="btn btn-primary btn-lg"
+            onClick={() => {
+              const name = prompt('Nome do seu primeiro baralho:', 'Meu Tarot')
+              if (name) {
+                api.createDeck(name, 'Baralho personalizado').then(() => {
+                  navigate('/library')
+                })
+              }
+            }}
+          >
+            ✨ Criar baralho
+          </button>
+          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginTop: '24px', flexWrap: 'wrap' }}>
+            <button className="btn btn-outline" onClick={() => navigate('/library')}>📚 Biblioteca</button>
+            <button className="btn btn-outline" onClick={handleRestart}>🔄 Recarregar</button>
+          </div>
         </div>
       </div>
     )

@@ -5,7 +5,12 @@
   "build": {
     "env": {}
   },
-  "env": {
-    "VITE_API_URL": "https://api-lets-tarot.onrender.com"
-  }
+  "rewrites": [
+    { "source": "/login", "destination": "/index.html" },
+    { "source": "/register", "destination": "/index.html" },
+    { "source": "/stats", "destination": "/index.html" },
+    { "source": "/study/:path*", "destination": "/index.html" },
+    { "source": "/decks/:path*", "destination": "/index.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }

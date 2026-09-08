@@ -92,6 +92,23 @@ export default function LibraryPage({ onSelectDeck }: LibraryPageProps) {
         <p style={{ fontSize: '16px', color: 'var(--text-muted)', maxWidth: '500px' }}>
           Explore todas as 78 cartas do baralho Rider-Waite-Smith. Pesquise por nome ou significado.
         </p>
+        {decks.length > 0 && (
+          <button
+            className="btn btn-primary"
+            style={{ marginTop: '16px', alignSelf: 'flex-start' }}
+            onClick={async () => {
+              const name = prompt('Nome do baralho:')
+              if (name) {
+                try {
+                  await api.createDeck(name, '')
+                  loadData()
+                } catch {}
+              }
+            }}
+          >
+            + Novo baralho
+          </button>
+        )}
       </div>
 
       <div style={{
@@ -158,7 +175,28 @@ export default function LibraryPage({ onSelectDeck }: LibraryPageProps) {
             Escolha um baralho
           </label>
           {decks.length === 0 ? (
-            <p style={{ color: 'var(--text-muted)' }}>Você ainda não criou baralhos.</p>
+            <div style={{ textAlign: 'center', padding: '32px', border: '2px dashed var(--border)', borderRadius: 'var(--radius)' }}>
+              <p style={{ color: 'var(--text-muted)', marginBottom: '16px' }}>Você ainda não criou nenhum baralho.</p>
+              <button
+                className="btn btn-primary"
+                onClick={async () => {
+                  const name = prompt('Nome do seu primeiro baralho:', 'Meu Tarot')
+                  if (name) {
+                    try {
+                      await api.createDeck(name, 'Baralho personalizado')
+                      loadData()
+                    } catch (err) {
+                      console.error(err)
+                    }
+                  }
+                }}
+              >
+                ✨ Criar meu primeiro baralho
+              </button>
+              <p style={{ color: 'var(--text-muted)', fontSize: '12px', marginTop: '12px' }}>
+                Crie baralhos personalizados para estudar com repetição espaçada (SM-2).
+              </p>
+            </div>
           ) : (
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
               {decks.map(deck => (

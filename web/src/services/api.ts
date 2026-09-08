@@ -8,7 +8,7 @@ const getApiBase = (): string => {
   // In production (GitHub Pages), point to the deployed API domain.
   // Replace with your Render/Fly.io/whatever API URL once deployed.
   if (import.meta.env.PROD) {
-    return 'https://api-lets-tarot.onrender.com'
+    return 'https://lets-tarot-api.onrender.com'
   }
 
   // Local dev fallback
