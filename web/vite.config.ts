@@ -7,6 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      selfDestroying: false,
       includeAssets: ['favicon.svg', 'icons/icon-192.svg', 'icons/icon-512.svg'],
       manifest: {
         name: 'Lets-Tarot',
@@ -39,6 +40,7 @@ export default defineConfig({
         skipWaiting: true,
         clientsClaim: true,
         navigateFallback: '/index.html',
+        maximumFileSizeToCacheInBytes: 3000000,
         runtimeCaching: [
           {
             urlPattern: ({url}) => url.hostname === 'cdn.jsdelivr.net',
@@ -61,7 +63,7 @@ export default defineConfig({
               cacheName: 'api-responses',
               expiration: {
                 maxEntries: 100,
-                maxAgeSeconds: 60 * 60
+                maxAgeSeconds: 5 * 60
               },
               cacheableResponse: {
                 statuses: [0, 200]
@@ -69,7 +71,10 @@ export default defineConfig({
             }
           }
         ]
-      }
+      },
+      srcDir: 'src',
+      filename: 'sw.js',
+      strategies: 'generateSW'
     })
   ],
   server: {
