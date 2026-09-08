@@ -3,6 +3,7 @@ package middleware
 import (
 	"log"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -23,7 +24,19 @@ func Logger() gin.HandlerFunc {
 
 func CORS(clientURL string) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.Header("Access-Control-Allow-Origin", clientURL)
+		origin := c.GetHeader("Origin")
+		// Allow the configured CLIENT_URL or any *.vercel.app origin
+		allowOrigin := clientURL
+		if origin != "" {
+			if origin == clientURL {
+				allowOrigin = clientURL
+			} else if strings.Contains(origin, ".vercel.app") {
+				allowOrigin = origin
+			} else if origin == clientURL {
+				allowOrigin = origin
+			}
+		}
+		c.Header("Access-Control-Allow-Origin", allowOrigin)
 		c.Header("Access-Control-Allow-Credentials", "true")
 		c.Header("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
 		c.Header("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT, DELETE, PATCH")
