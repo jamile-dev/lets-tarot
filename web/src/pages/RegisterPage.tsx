@@ -99,12 +99,14 @@ export default function RegisterPage() {
             />
           </div>
 
-          {error && <div className="form-error">{error}</div>}
+          {error && <div className="form-error" role="alert" aria-live="polite">{error}</div>}
 
           <button
             type="submit"
             className="btn btn-secondary btn-lg"
             disabled={loading}
+            aria-busy={loading}
+            aria-describedby={error ? "form-error" : undefined}
           >
             {loading ? 'Criando...' : 'Criar conta 🎴'}
           </button>

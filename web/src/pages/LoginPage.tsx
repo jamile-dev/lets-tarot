@@ -61,12 +61,14 @@ export default function LoginPage() {
             />
           </div>
 
-          {error && <div className="form-error">{error}</div>}
+          {error && <div className="form-error" role="alert" aria-live="polite">{error}</div>}
 
           <button
             type="submit"
             className="btn btn-primary btn-lg"
             disabled={loading}
+            aria-busy={loading}
+            aria-describedby={error ? "form-error" : undefined}
           >
             {loading ? 'Carregando...' : 'Entrar 🔓'}
           </button>

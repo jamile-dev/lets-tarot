@@ -11,33 +11,44 @@ export default function Layout() {
 
   return (
     <div className="app-container">
-      <nav className="nav-bar">
+      <a href="#main-content" className="skip-link">Pular para o conteúdo principal</a>
+      <nav className="nav-bar" role="navigation" aria-label="Navegação principal">
         <div className="nav-left">
-          <span className="nav-logo-icon">🎴</span>
+          <span className="nav-logo-icon" aria-hidden="true">🎴</span>
           <span className="nav-logo-text">Lets-Tarot</span>
           {isAuthenticated && user && (
-            <span className="nav-user">{user.email.split('@')[0]}</span>
+            <span className="nav-user" aria-label={`Usuário: ${user.email.split('@')[0]}`}>{user.email.split('@')[0]}</span>
           )}
         </div>
         {isAuthenticated && (
           <div className="nav-right">
-            {navItems.map(item => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-              >
-                <span className="nav-link-icon">{item.icon}</span>
-                {item.label}
+          {navItems.map(item => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+              aria-label={item.label}
+            >
+                {({ isActive }) => (
+                  <>
+                    <span className="nav-link-icon" aria-hidden="true">{item.icon}</span>
+                    <span className="nav-link-text">{item.label}</span>
+                    {isActive && <span className="sr-only"> (atual)</span>}
+                  </>
+                )}
               </NavLink>
             ))}
-            <button className="nav-logout" onClick={logout}>
+            <button
+              className="nav-logout"
+              onClick={logout}
+              aria-label="Sair da conta"
+            >
               Sair
             </button>
           </div>
         )}
       </nav>
-      <main className="main-content">
+      <main className="main-content" id="main-content">
         <Outlet />
       </main>
       {isAuthenticated && (

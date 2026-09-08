@@ -204,6 +204,15 @@ export default function StudyPage() {
             className="study-card study-card-back"
             style={{ opacity: flipped ? 0 : 1 }}
             onClick={handleFlip}
+            role="button"
+            tabIndex={0}
+            aria-label="Clique para revelar a carta"
+            onKeyDown={e => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                handleFlip()
+              }
+            }}
           >
             <span className="card-back-pattern">🎴</span>
             <h3>{card.name_pt}</h3>
@@ -264,6 +273,7 @@ export default function StudyPage() {
                 key={r}
                 className={`rating-dot r${r} ${selectedRating === r ? 'active' : ''}`}
                 onClick={() => handleRating(r)}
+                aria-label={`Avaliação ${r}: ${r === 1 ? 'Não lembro' : r === 2 ? 'Fraco' : r === 3 ? 'Dificuldade' : r === 4 ? 'Bom' : 'Perfeito'}`}
               >
                 {r}
               </button>

@@ -152,6 +152,7 @@ export default function LibraryPage({ onSelectDeck }: LibraryPageProps) {
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
             className={showSearch ? 'input-focused' : ''}
+            aria-label="Pesquisar cartas"
           />
           <span className="search-icon">🔍</span>
         </form>
@@ -307,6 +308,7 @@ function CardItem({ card, onCardClick }: CardItemProps) {
       onClick={onCardClick}
       role="button"
       tabIndex={0}
+      aria-label={`Ver detalhes da carta ${card.name_pt}`}
       onKeyDown={e => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault()

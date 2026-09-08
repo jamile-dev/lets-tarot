@@ -39,7 +39,7 @@ export default function StatsPage() {
         </div>
         <div className="empty-state">
           <h3>⚠️ {error || 'Não foi possível carregar'}</h3>
-          <button className="btn btn-primary" onClick={loadStats}>
+          <button className="btn btn-primary" onClick={loadStats} aria-label="Tentar carregar estatísticas novamente">
             Tentar novamente
           </button>
         </div>
@@ -81,6 +81,7 @@ export default function StatsPage() {
             <div
               key={i}
               className={`streak-day ${i < stats.current_streak ? 'active' : ''}`}
+              aria-label={i < stats.current_streak ? `Dia ${i + 1} de estudo` : `Dia ${i + 1} (não estudado)`}
             />
           ))}
         </div>
