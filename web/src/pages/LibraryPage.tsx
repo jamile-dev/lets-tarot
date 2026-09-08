@@ -82,7 +82,7 @@ export default function LibraryPage({ onSelectDeck }: LibraryPageProps) {
     return (
       <div className="loading-screen">
         <div className="loader"></div>
-        <p style={{ marginTop: '16px', color: 'var(--text-muted)' }}>Carregando baralho...</p>
+        <p>Carregando baralho...</p>
       </div>
     )
   }
@@ -90,44 +90,39 @@ export default function LibraryPage({ onSelectDeck }: LibraryPageProps) {
   return (
     <div>
       <div className="page-header">
-        <h1>Biblioteca 🎴</h1>
-        <p style={{ fontSize: '16px', color: 'var(--text-muted)', maxWidth: '500px' }}>
+        <h1>Biblioteca 📚</h1>
+        <p>
           Explore todas as 78 cartas do baralho Rider-Waite-Smith. Pesquise por nome ou significado.
         </p>
         {decks.length === 0 && (
-          <div style={{
-            marginTop: '24px',
-            padding: '20px',
-            background: 'var(--bg-elevated)',
-            border: '3px dashed var(--border)',
-            borderRadius: 'var(--radius)'
-          }}>
-            <p style={{ color: 'var(--text-muted)', marginBottom: '16px' }}>
+          <div className="create-deck-cta">
+            <p>
               <strong>Você ainda não tem baralhos criados.</strong> Crie um para começar a estudar com repetição espaçada.
             </p>
-            <button
-              className="btn btn-primary"
-              onClick={async () => {
-                const name = prompt('Nome do seu primeiro baralho:', 'Meu Tarot')
-                if (name) {
-                  try {
-                    await api.createDeck(name, 'Baralho de estudo')
-                    await loadData()
-                  } catch (err) {
-                    console.error(err)
+            <div className="cta-buttons">
+              <button
+                className="btn btn-primary"
+                onClick={async () => {
+                  const name = prompt('Nome do seu primeiro baralho:', 'Meu Tarot')
+                  if (name) {
+                    try {
+                      await api.createDeck(name, 'Baralho de estudo')
+                      await loadData()
+                    } catch (err) {
+                      console.error(err)
+                    }
                   }
-                }
-              }}
-              style={{ marginRight: '12px' }}
-            >
-              ✨ Criar meu primeiro baralho
-            </button>
-            <button
-              className="btn btn-outline"
-              onClick={() => navigate('/study')}
-            >
-              🃏 Estudar cartas aleatórias
-            </button>
+                }}
+              >
+                ✨ Criar meu primeiro baralho
+              </button>
+              <button
+                className="btn btn-outline"
+                onClick={() => navigate('/study')}
+              >
+                🃏 Estudar cartas aleatórias
+              </button>
+            </div>
           </div>
         )}
         {decks.length > 0 && (
@@ -149,36 +144,19 @@ export default function LibraryPage({ onSelectDeck }: LibraryPageProps) {
         )}
       </div>
 
-      <div style={{
-        display: 'flex',
-        gap: '12px',
-        marginBottom: '24px',
-        flexWrap: 'wrap',
-        alignItems: 'center'
-      }}>
-        <form onSubmit={handleSearch} style={{ position: 'relative', flex: '1', minWidth: '250px' }}>
+      <div className="search-bar">
+        <form onSubmit={handleSearch} className="search-form">
           <input
             type="text"
             placeholder="Pesquisar cartas..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            style={{
-              paddingLeft: '40px',
-              borderColor: showSearch ? 'var(--blue)' : 'var(--border)',
-              boxShadow: showSearch ? '0 0 0 3px rgba(0,187,249,0.2)' : undefined
-            }}
+            className={showSearch ? 'input-focused' : ''}
           />
-          <span style={{
-            position: 'absolute',
-            left: '14px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            fontSize: '18px',
-            color: 'var(--text-muted)'
-          }}>🔍</span>
+          <span className="search-icon">🔍</span>
         </form>
 
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+        <div className="filter-chips">
           <FilterChip
             label="Todas"
             active={activeFilter === 'all' && !showSearch}
@@ -188,20 +166,17 @@ export default function LibraryPage({ onSelectDeck }: LibraryPageProps) {
             label="Arcana Maior"
             active={activeFilter === 'major'}
             onClick={() => { setActiveFilter('major'); clearSearch() }}
-            color="var(--purple, #9B5DE5)"
           />
           <FilterChip
             label="Arcana Menor"
             active={activeFilter === 'minor'}
             onClick={() => { setActiveFilter('minor'); clearSearch() }}
-            color="var(--blue)"
           />
           {decks.length > 0 && (
             <FilterChip
               label="Meus baralhos"
               active={activeFilter === 'deck'}
               onClick={() => { setActiveFilter('deck'); clearSearch() }}
-              color="var(--green)"
             />
           )}
         </div>
@@ -209,12 +184,10 @@ export default function LibraryPage({ onSelectDeck }: LibraryPageProps) {
 
       {activeFilter === 'deck' && (
         <div className="deck-selector">
-          <label style={{ fontWeight: 700, textTransform: 'uppercase', fontSize: '14px', color: 'var(--yellow)', marginBottom: '8px', display: 'block' }}>
-            Escolha um baralho
-          </label>
+          <label>Escolha um baralho</label>
           {decks.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '32px', border: '2px dashed var(--border)', borderRadius: 'var(--radius)' }}>
-              <p style={{ color: 'var(--text-muted)', marginBottom: '16px' }}>Você ainda não criou nenhum baralho.</p>
+            <div className="empty-state">
+              <p>Você ainda não criou nenhum baralho.</p>
               <button
                 className="btn btn-primary"
                 onClick={async () => {
@@ -231,12 +204,12 @@ export default function LibraryPage({ onSelectDeck }: LibraryPageProps) {
               >
                 ✨ Criar meu primeiro baralho
               </button>
-              <p style={{ color: 'var(--text-muted)', fontSize: '12px', marginTop: '12px' }}>
+              <p className="hint-text">
                 Crie baralhos personalizados para estudar com repetição espaçada (SM-2).
               </p>
             </div>
           ) : (
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            <div className="deck-chips">
               {decks.map(deck => (
                 <button
                   key={deck.id}
@@ -251,17 +224,8 @@ export default function LibraryPage({ onSelectDeck }: LibraryPageProps) {
         </div>
       )}
 
-      <div style={{
-        marginBottom: '16px',
-        padding: '8px 16px',
-        background: 'var(--bg-card)',
-        border: '2px solid var(--border)',
-        borderRadius: 'var(--radius)',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}>
-        <span style={{ fontWeight: 700, fontSize: '14px', textTransform: 'uppercase' }}>
+      <div className="card-count-badge">
+        <span className="badge-text">
           {displayCards.length} carta{displayCards.length !== 1 ? 's' : ''}
           {activeFilter === 'major' && ' (Arcana Maior)'}
           {activeFilter === 'minor' && ' (Arcana Menor)'}
@@ -294,24 +258,12 @@ export default function LibraryPage({ onSelectDeck }: LibraryPageProps) {
   )
 }
 
-function FilterChip({ label, active, onClick, color }: {
-  label: string
-  active: boolean
-  onClick: () => void
-  color?: string
-}) {
+function FilterChip({ label, active, onClick, color }: { label: string; active: boolean; onClick: () => void; color?: string }) {
   return (
     <button
-      className="btn btn-sm"
+      className={`btn btn-sm ${active ? 'btn-primary' : 'btn-outline'}`}
       onClick={onClick}
-      style={{
-        background: active ? (color || 'var(--pink)') : 'var(--bg-elevated)',
-        color: active ? '#fff' : 'var(--text-muted)',
-        borderColor: active ? (color || 'var(--pink)') : 'var(--border)',
-        boxShadow: active ? `3px 3px 0 ${color || 'var(--pink)'}` : 'var(--shadow)',
-        minWidth: '100px',
-        textAlign: 'center'
-      }}
+      style={color ? { background: color, borderColor: color } : {}}
     >
       {label}
     </button>
@@ -363,9 +315,7 @@ function CardItem({ card, onCardClick }: CardItemProps) {
       }}
     >
       <div className="card-img-container">
-        {!imageLoaded && (
-          <div className="card-img-placeholder" />
-        )}
+        {!imageLoaded && <div className="card-img-placeholder" />}
         <img
           src={`${import.meta.env.VITE_CDN_BASE_URL || 'https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards'}/${card.id}.jpg`}
           alt={card.name_pt}
@@ -373,16 +323,12 @@ function CardItem({ card, onCardClick }: CardItemProps) {
           onLoad={() => setImageLoaded(true)}
           onError={() => setImageLoaded(true)}
         />
-        {!imageLoaded && (
-          <span className="card-placeholder-icon">🎴</span>
-        )}
+        {!imageLoaded && <span className="card-placeholder-icon">🎴</span>}
       </div>
       <div className="card-body">
         <div className="card-name-row">
           <h3 className="card-name">{card.name_pt}</h3>
-          <span className={`tag ${card.type === 'major' ? 'tag-major' : 'tag-minor'}`}
-            style={{ fontSize: '10px', padding: '2px 6px' }}
-          >
+          <span className={`tag ${card.type === 'major' ? 'tag-major' : 'tag-minor'}`}>
             {card.type === 'major' ? 'AM' : 'AMen'}
           </span>
         </div>

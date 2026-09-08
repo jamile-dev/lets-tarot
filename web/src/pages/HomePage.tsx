@@ -11,7 +11,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="hero-page">
+    <>
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content">
@@ -21,7 +21,6 @@ export default function HomePage() {
             Aprenda tarô com repetição espaçada (SM-2).<br />
             78 cartas Rider-Waite-Smith em português, com significados diretos e reversos.
           </p>
-
           <div className="btn-group-hero">
             <button
               className="btn btn-primary btn-lg"
@@ -46,13 +45,11 @@ export default function HomePage() {
           <h3>78 Cartas</h3>
           <p>Todas as cartas do baralho Rider-Waite-Smith com significados completos em português.</p>
         </div>
-
         <div className="feature-card">
           <span className="feature-icon">🧠</span>
           <h3>SM-2</h3>
           <p>Algoritmo de repetição espaçada como Anki. Revisões no momento certo para fixar no longo prazo.</p>
         </div>
-
         <div className="feature-card">
           <span className="feature-icon">📊</span>
           <h3>Estatísticas</h3>
@@ -65,22 +62,28 @@ export default function HomePage() {
         <h2 className="howto-title">Como funciona</h2>
         <div className="howto-steps">
           <div className="howto-step">
-            <span className="step-number" style={{ background: 'var(--pink)' }}>1</span>
-            <h3>Crie sua conta</h3>
-            <p>Cadastre-se com seu email em segundos. Sem complicação.</p>
+            <span className="step-number" style={{ background: 'var(--gold)' }}>1</span>
+            <div>
+              <h3>Crie sua conta</h3>
+              <p>Cadastre-se com seu email em segundos. Sem complicação.</p>
+            </div>
           </div>
           <div className="howto-step">
-            <span className="step-number" style={{ background: 'var(--blue)' }}>2</span>
-            <h3>Crie um baralho</h3>
-            <p>Monte baralhos personalizados ou use o baralho padrão com as 78 cartas.</p>
+            <span className="step-number" style={{ background: 'var(--purple)' }}>2</span>
+            <div>
+              <h3>Crie um baralho</h3>
+              <p>Monte baralhos personalizados ou use o baralho padrão com as 78 cartas.</p>
+            </div>
           </div>
           <div className="howto-step">
             <span className="step-number" style={{ background: 'var(--green)' }}>3</span>
-            <h3>Estude e repita</h3>
-            <p>Revise as cartas pelo algoritmo SM-2. Avalie seu conhecimento (1-5) e o sistema agenda as próximas revisões.</p>
+            <div>
+              <h3>Estude e repita</h3>
+              <p>Revise as cartas pelo algoritmo SM-2. Avalie seu conhecimento (1-5) e o sistema agenda as próximas revisões.</p>
+            </div>
           </div>
         </div>
       </section>
-    </div>
+    </>
   )
 }
