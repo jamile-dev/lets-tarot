@@ -41,7 +41,7 @@ export default defineConfig({
         navigateFallback: '/index.html',
         runtimeCaching: [
           {
-            urlPattern: /^https:\/\/cdn\.jsdelivr\.net\/.*/i,
+            urlPattern: ({url}) => url.hostname === 'cdn.jsdelivr.net',
             handler: 'CacheFirst',
             options: {
               cacheName: 'card-images',
@@ -55,7 +55,7 @@ export default defineConfig({
             }
           },
           {
-            urlPattern: /^https:\/\/api\.lets-tarot\.dev\/.*/i,
+            urlPattern: ({url}) => url.hostname === 'lets-tarot-api.onrender.com',
             handler: 'NetworkFirst',
             options: {
               cacheName: 'api-responses',
