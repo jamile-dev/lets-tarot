@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 
 export default function LoginPage() {
@@ -14,44 +14,26 @@ export default function LoginPage() {
     e.preventDefault()
     setLoading(true)
     setError(null)
-
     try {
       await login(email, password)
       navigate('/library')
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erro ao fazer login')
+      setError(err instanceof Error ? err.message : 'Credenciais inválidas')
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px',
-      background: 'var(--bg)'
-    }}>
-      <div style={{
-        width: '100%',
-        maxWidth: '420px',
-        background: 'var(--bg-card)',
-        border: '4px solid var(--pink)',
-        boxShadow: '8px 8px 0 var(--pink)',
-        borderRadius: '12px',
-        padding: '40px'
-      }}>
-        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-          <span style={{ fontSize: '56px', display: 'block', marginBottom: '8px' }}>🎴</span>
-          <h1 style={{ fontSize: '32px', color: 'var(--yellow)' }}>Bem-vindo de volta!</h1>
-          <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginTop: '4px' }}>
-            Entre para acompanhar seu progresso
-          </p>
+    <div className="auth-page">
+      <div className="auth-card">
+        <div className="auth-header">
+          <span className="auth-icon">🎴</span>
+          <h1 className="auth-title">Lets-Tarot</h1>
+          <p className="auth-subtitle">Aprenda tarô com repetição espaçada (SM-2)</p>
         </div>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -79,35 +61,22 @@ export default function LoginPage() {
             />
           </div>
 
-          {error && (
-            <div className="form-error" style={{
-              padding: '12px',
-              background: 'rgba(255,64,64,0.1)',
-              border: '2px solid var(--red)',
-              borderRadius: 'var(--radius)',
-              marginBottom: '16px'
-            }}>
-              {error}
-            </div>
-          )}
+          {error && <div className="form-error">{error}</div>}
 
           <button
             type="submit"
             className="btn btn-primary btn-lg"
-            style={{ width: '100%', marginTop: '8px' }}
             disabled={loading}
           >
-            {loading ? 'Entrando...' : 'Entrar 🔓'}
+            {loading ? 'Carregando...' : 'Entrar 🔓'}
           </button>
         </form>
 
-        <div style={{ textAlign: 'center', marginTop: '24px' }}>
-          <p style={{ color: 'var(--text-muted)', fontSize: '14px' }}>
-            Não tem uma conta?{' '}
-            <a href="/register" style={{ color: 'var(--blue)', fontWeight: 700, textDecoration: 'none' }}>
-              Registre-se
-            </a>
-          </p>
+        <div className="auth-footer">
+          <p>Não tem uma conta?</p>
+          <Link to="/register" className="btn btn-outline btn-sm">
+            Criar conta
+          </Link>
         </div>
       </div>
     </div>

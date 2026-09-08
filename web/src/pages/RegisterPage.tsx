@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 
 export default function RegisterPage() {
@@ -22,10 +22,8 @@ export default function RegisterPage() {
       setError('A senha deve ter pelo menos 8 caracteres')
       return
     }
-
     setLoading(true)
     setError(null)
-
     try {
       await register(email, password)
       setSuccess(true)
@@ -39,56 +37,28 @@ export default function RegisterPage() {
 
   if (success) {
     return (
-      <div style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: 'var(--bg)'
-      }}>
-        <div style={{
-          textAlign: 'center',
-          padding: '40px',
-          background: 'var(--bg-card)',
-          border: '4px solid var(--green)',
-          boxShadow: '8px 8px 0 var(--green)',
-          borderRadius: '12px'
-        }}>
-          <span style={{ fontSize: '64px', display: 'block', marginBottom: '16px' }}>✅</span>
-          <h2 style={{ color: 'var(--green)', marginBottom: '8px' }}>Conta criada!</h2>
-          <p style={{ color: 'var(--text-muted)' }}>Redirecionando para a biblioteca...</p>
+      <div className="auth-page">
+        <div className="auth-card">
+          <div className="auth-header">
+            <span className="auth-icon">✅</span>
+            <h1 className="auth-title">Conta criada!</h1>
+            <p className="auth-subtitle">Redirecionando para a biblioteca...</p>
+          </div>
         </div>
       </div>
     )
   }
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px',
-      background: 'var(--bg)'
-    }}>
-      <div style={{
-        width: '100%',
-        maxWidth: '420px',
-        background: 'var(--bg-card)',
-        border: '4px solid var(--blue)',
-        boxShadow: '8px 8px 0 var(--blue)',
-        borderRadius: '12px',
-        padding: '40px'
-      }}>
-        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-          <span style={{ fontSize: '56px', display: 'block', marginBottom: '8px' }}>🎴</span>
-          <h1 style={{ fontSize: '32px', color: 'var(--blue)' }}>Criar conta</h1>
-          <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginTop: '4px' }}>
-            Comece a aprender tarot hoje
-          </p>
+    <div className="auth-page">
+      <div className="auth-card">
+        <div className="auth-header">
+          <span className="auth-icon">🎴</span>
+          <h1 className="auth-title">Lets-Tarot</h1>
+          <p className="auth-subtitle">Crie sua conta e comece a estudar</p>
         </div>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -129,35 +99,22 @@ export default function RegisterPage() {
             />
           </div>
 
-          {error && (
-            <div className="form-error" style={{
-              padding: '12px',
-              background: 'rgba(255,64,64,0.1)',
-              border: '2px solid var(--red)',
-              borderRadius: 'var(--radius)',
-              marginBottom: '16px'
-            }}>
-              {error}
-            </div>
-          )}
+          {error && <div className="form-error">{error}</div>}
 
           <button
             type="submit"
             className="btn btn-secondary btn-lg"
-            style={{ width: '100%', marginTop: '8px' }}
             disabled={loading}
           >
             {loading ? 'Criando...' : 'Criar conta 🎴'}
           </button>
         </form>
 
-        <div style={{ textAlign: 'center', marginTop: '24px' }}>
-          <p style={{ color: 'var(--text-muted)', fontSize: '14px' }}>
-            Já tem uma conta?{' '}
-            <a href="/login" style={{ color: 'var(--pink)', fontWeight: 700, textDecoration: 'none' }}>
-              Faça login
-            </a>
-          </p>
+        <div className="auth-footer">
+          <p>Já tem uma conta?</p>
+          <Link to="/login" className="btn btn-outline btn-sm">
+            Fazer login
+          </Link>
         </div>
       </div>
     </div>
