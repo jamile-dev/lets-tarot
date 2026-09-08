@@ -1,16 +1,11 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, Outlet } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
-import type { ReactNode } from 'react'
 
-interface LayoutProps {
-  children?: ReactNode
-}
-
-export default function Layout({ children }: LayoutProps) {
+export default function Layout() {
   const { user, logout, isAuthenticated } = useAuth()
   const navItems = [
     { to: '/library', label: 'Biblioteca', icon: '📚' },
-    { to: '/study', label: 'Estudiar', icon: '🎴' },
+    { to: '/study', label: 'Estudar', icon: '🎴' },
     { to: '/stats', label: 'Estatísticas', icon: '📊' },
   ]
 
@@ -43,7 +38,7 @@ export default function Layout({ children }: LayoutProps) {
         )}
       </nav>
       <main className="main-content">
-        {children}
+        <Outlet />
       </main>
       {isAuthenticated && (
         <footer className="footer">
