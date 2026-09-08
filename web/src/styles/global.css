@@ -521,9 +521,9 @@ p { line-height: 1.6; color: var(--text-muted); }
   max-width: 440px;
   background: var(--bg-card);
   border: 4px solid var(--pink);
-  box-shadow: 12px 12px 0 var(--pink);
+  box-shadow: 8px 8px 0 var(--pink);
   border-radius: var(--radius);
-  padding: 48px 40px;
+  padding: 40px 32px;
 }
 
 .auth-header {
@@ -562,6 +562,49 @@ p { line-height: 1.6; color: var(--text-muted); }
   margin-bottom: 12px;
 }
 
+.hero-title { font-size: 36px; color: var(--yellow); margin-bottom: 8px; }
+.hero-icon { font-size: 64px; display: block; margin-bottom: 12px; }
+.hero-subtitle { font-size: 18px; color: var(--text-muted); line-height: 1.6; margin-bottom: 32px; max-width: 600px; }
+.btn-group-hero { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+.features-section {
+  max-width: 1000px;
+  margin: 40px auto 60px;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+.feature-card {
+  background: var(--bg-card);
+  border: 3px solid var(--pink);
+  border-radius: var(--radius);
+  padding: 28px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.feature-card:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--pink); }
+.feature-icon { font-size: 48px; display: block; margin-bottom: 12px; }
+
+.howto-section {
+  max-width: 800px;
+  margin: 40px auto 60px;
+  padding: 32px 24px;
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.howto-title { text-align: center; color: var(--blue); margin-bottom: 24px; font-size: 28px; }
+.howto-steps { display: flex; flex-direction: column; gap: 20px; }
+.howto-step { display: flex; gap: 16px; align-items: flex-start; }
+.step-number {
+  width: 40px; height: 40px; border-radius: 50%; color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 18px; flex-shrink: 0;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .auth-card {
@@ -570,16 +613,41 @@ p { line-height: 1.6; color: var(--text-muted); }
     padding: 32px 24px;
   }
   .auth-title { font-size: 28px; }
-  h1.page-header h1 { font-size: 32px; }
+  .auth-icon { font-size: 56px; }
+  .hero-title { font-size: 30px; }
+  .hero-icon { font-size: 56px; }
+  .main-content { padding: 24px 16px 80px; }
+  .page-header h1 { font-size: 32px; }
+  h1 { font-size: 36px; }
+  .features-section { margin: 30px auto; padding: 16px; }
+  .howto-section { margin: 30px auto; padding: 24px; }
 }
+
 @media (max-width: 640px) {
-  h1 { font-size: 32px; }
-  h2 { font-size: 26px; }
-  .card-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
-  .stat-value { font-size: 36px; }
+  .hero-title { font-size: 26px; }
+  .hero-icon { font-size: 48px; }
+  .auth-icon { font-size: 48px; }
+  .auth-title { font-size: 24px; }
+  .auth-card { padding: 28px 20px; max-width: 100%; }
   .btn { padding: 12px 20px; font-size: 14px; }
+  .btn-lg { padding: 15px 26px; font-size: 16px; }
+  .card-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .stat-value { font-size: 32px; }
+  .study-card-front img { width: 130px; height: 220px; }
+  .study-card-back .card-back-pattern { font-size: 42px; }
 }
+
 @media (max-width: 480px) {
-  .auth-card { padding: 24px 16px; }
-  .main-content { padding: 16px 8px 60px; }
+  .hero-title { font-size: 26px; }
+  .hero-icon { font-size: 42px; }
+  .hero-subtitle { font-size: 15px; }
+  .auth-icon { font-size: 42px; }
+  .auth-title { font-size: 22px; }
+  .auth-card { padding: 22px 16px; border-width: 2px; box-shadow: 3px 3px 0 var(--pink); }
+  .btn { padding: 10px 16px; font-size: 13px; }
+  .btn-lg { padding: 14px 22px; font-size: 15px; }
+  .stat-value { font-size: 28px; }
+  .features-section { grid-template-columns: 1fr; }
+  .howto-section { padding: 24px 16px; }
+  .nav-grid { grid-template-columns: repeat(2, 1fr); }
 }
