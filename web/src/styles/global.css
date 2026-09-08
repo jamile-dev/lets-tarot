@@ -824,16 +824,20 @@ p { color: var(--text-secondary); line-height: 1.7; }
   box-shadow: var(--shadow);
 }
 .study-card-back {
-  text-align: center;
-  padding: 3rem 1rem;
-  cursor: pointer;
-  min-height: 300px;
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100%;
+  width: 100%;
+  padding: 2rem 1rem;
+  cursor: pointer;
   transition: all 0.3s ease;
   color: var(--text-secondary);
+  box-sizing: border-box;
 }
 .study-card-back:hover { transform: scale(1.02); color: var(--gold); }
 .study-card-back .card-back-pattern { font-size: 5rem; margin-bottom: 1.5rem; opacity: 0.3; }
@@ -1064,35 +1068,55 @@ p { color: var(--text-secondary); line-height: 1.7; }
   left: 0;
 }
 
-/* Study page extras */
+/* Study page extras — proper 3D card flip layout */
 .study-card-back-wrapper {
   perspective: 1000px;
   margin-bottom: 2rem;
+  width: 100%;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 460px;
+}
+@media (max-width: 480px) {
+  .study-card-back-wrapper {
+    max-width: 90vw;
+    height: 400px;
+  }
+}
+@media (max-width: 360px) {
+  .study-card-back-wrapper {
+    height: 360px;
+  }
 }
 .study-card-flip {
   position: relative;
   width: 100%;
+  height: 100%;
   transition: transform 0.5s ease;
   transform-style: preserve-3d;
 }
-.study-card-back {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.study-card-flip.flipped {
+  transform: rotateY(180deg);
 }
 .study-card-front {
   position: absolute;
   inset: 0;
   backface-visibility: hidden;
   transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  padding: 1.5rem;
+  text-align: center;
 }
 .card-placeholder-container {
-  width: 150px;
-  height: 230px;
+  width: 100%;
+  max-width: 180px;
+  height: 280px;
   border: 2px solid var(--border-gold);
   border-radius: var(--radius-sm);
   overflow: hidden;
@@ -1103,15 +1127,16 @@ p { color: var(--text-secondary); line-height: 1.7; }
   margin-top: 1rem;
   box-shadow: var(--shadow);
 }
-.card-placeholder-img { width: 100%; height: 100%; object-fit: cover; }
+.card-placeholder-img { width: 100%; height: 100%; object-fit: contain; }
 .study-card-img {
-  width: 160px;
-  height: 260px;
+  width: 90%;
+  max-width: 160px;
+  height: auto;
+  max-height: 280px;
   object-fit: contain;
   border: 2px solid var(--border-gold);
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-strong);
-  border-radius: var(--radius-sm);
   margin-bottom: 1.5rem;
 }
 .rating-section { text-align: center; margin-bottom: 2rem; }

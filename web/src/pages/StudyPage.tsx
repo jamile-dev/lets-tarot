@@ -191,14 +191,9 @@ export default function StudyPage() {
         />
       </div>
 
-      <div className="study-card-back-wrapper" style={{ perspective: '1000px', marginBottom: '32px' }}>
+      <div className="study-card-back-wrapper">
         <div
-          className="study-card-flip"
-          style={{
-            transformStyle: 'preserve-3d',
-            transition: 'transform 0.5s ease',
-            transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
-          }}
+          className={`study-card-flip ${flipped ? 'flipped' : ''}`}
         >
           <div
             className="study-card study-card-back"
@@ -233,7 +228,6 @@ export default function StudyPage() {
 
           <div
             className="study-card study-card-front"
-            style={{ transform: 'rotateY(180deg)' }}
           >
             <div className="card-header">
               <h2>{card.name_pt}</h2>
