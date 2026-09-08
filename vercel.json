@@ -11,6 +11,7 @@
     { "source": "/stats", "destination": "/index.html" },
     { "source": "/study/:path*", "destination": "/index.html" },
     { "source": "/decks/:path*", "destination": "/index.html" },
+    { "source": "/library", "destination": "/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
