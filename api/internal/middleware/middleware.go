@@ -25,14 +25,12 @@ func Logger() gin.HandlerFunc {
 func CORS(clientURL string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		origin := c.GetHeader("Origin")
-		// Allow the configured CLIENT_URL or any *.vercel.app origin
+		// Allow the configured CLIENT_URL or any Vercel/GitHub Pages origin
 		allowOrigin := clientURL
 		if origin != "" {
 			if origin == clientURL {
 				allowOrigin = clientURL
-			} else if strings.Contains(origin, ".vercel.app") {
-				allowOrigin = origin
-			} else if origin == clientURL {
+			} else if strings.Contains(origin, ".vercel.app") || strings.Contains(origin, "github.io") {
 				allowOrigin = origin
 			}
 		}
