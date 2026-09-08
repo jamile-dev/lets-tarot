@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import type { Card, Deck } from '../types'
 import { api } from '../services/api'
 
@@ -7,6 +8,7 @@ interface LibraryPageProps {
 }
 
 export default function LibraryPage({ onSelectDeck }: LibraryPageProps) {
+  const navigate = useNavigate()
   const [cards, setCards] = useState<Card[]>([])
   const [decks, setDecks] = useState<Deck[]>([])
   const [selectedDeckId, setSelectedDeckId] = useState<string | null>(null)
@@ -92,6 +94,42 @@ export default function LibraryPage({ onSelectDeck }: LibraryPageProps) {
         <p style={{ fontSize: '16px', color: 'var(--text-muted)', maxWidth: '500px' }}>
           Explore todas as 78 cartas do baralho Rider-Waite-Smith. Pesquise por nome ou significado.
         </p>
+        {decks.length === 0 && (
+          <div style={{
+            marginTop: '24px',
+            padding: '20px',
+            background: 'var(--bg-elevated)',
+            border: '3px dashed var(--border)',
+            borderRadius: 'var(--radius)'
+          }}>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '16px' }}>
+              <strong>Você ainda não tem baralhos criados.</strong> Crie um para começar a estudar com repetição espaçada.
+            </p>
+            <button
+              className="btn btn-primary"
+              onClick={async () => {
+                const name = prompt('Nome do seu primeiro baralho:', 'Meu Tarot')
+                if (name) {
+                  try {
+                    await api.createDeck(name, 'Baralho de estudo')
+                    await loadData()
+                  } catch (err) {
+                    console.error(err)
+                  }
+                }
+              }}
+              style={{ marginRight: '12px' }}
+            >
+              ✨ Criar meu primeiro baralho
+            </button>
+            <button
+              className="btn btn-outline"
+              onClick={() => navigate('/study')}
+            >
+              🃏 Estudar cartas aleatórias
+            </button>
+          </div>
+        )}
         {decks.length > 0 && (
           <button
             className="btn btn-primary"
@@ -294,7 +332,6 @@ function CardGrid({ cards, onCardClick }: CardGridProps) {
       </div>
     )
   }
-
   return (
     <div className="card-grid">
       {cards.map(card => (

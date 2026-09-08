@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './hooks/useAuth'
 import Layout from './components/Layout'
+import HomePage from './pages/HomePage'
 import LibraryPage from './pages/LibraryPage'
 import StudyPage from './pages/StudyPage'
 import LoginPage from './pages/LoginPage'
@@ -22,7 +23,7 @@ function PublicRoute({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  const { isAuthenticated, loading } = useAuth()
+  const { loading } = useAuth()
 
   if (loading) {
     return <div className="loading-screen"><div className="loader"></div></div>
@@ -30,7 +31,7 @@ export default function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Navigate to={isAuthenticated ? "/library" : "/login"} replace />} />
+      <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
       <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
       <Route element={<Layout />}>
