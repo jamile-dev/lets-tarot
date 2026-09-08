@@ -361,59 +361,32 @@ function CardItem({ card, onCardClick }: CardItemProps) {
           onCardClick?.()
         }
       }}
-      style={{ position: 'relative' }}
     >
-      <div style={{
-        height: '200px',
-        background: 'var(--bg-elevated)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-        borderBottom: '3px solid var(--border)',
-        position: 'relative'
-      }}>
+      <div className="card-img-container">
         {!imageLoaded && (
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'linear-gradient(90deg, var(--bg-elevated), var(--bg-card))',
-            zIndex: 1
-          }} />
+          <div className="card-img-placeholder" />
         )}
         <img
           src={`${import.meta.env.VITE_CDN_BASE_URL || 'https://cdn.jsdelivr.net/gh/jamile-dev/lets-tarot@v0.1.0/cards'}/${card.id}.jpg`}
           alt={card.name_pt}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            opacity: imageLoaded ? 1 : 0,
-            transition: 'opacity 0.3s ease'
-          }}
+          className={imageLoaded ? '' : 'loading'}
           onLoad={() => setImageLoaded(true)}
           onError={() => setImageLoaded(true)}
         />
         {!imageLoaded && (
-          <span style={{
-            fontSize: '48px',
-            color: 'var(--text-muted)',
-            position: 'relative',
-            zIndex: 2
-          }}>
-            🎴
-          </span>
+          <span className="card-placeholder-icon">🎴</span>
         )}
       </div>
-      <div style={{ padding: '12px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
-          <h3 style={{ fontSize: '15px', marginBottom: 0, fontWeight: 700 }}>{card.name_pt}</h3>
+      <div className="card-body">
+        <div className="card-name-row">
+          <h3 className="card-name">{card.name_pt}</h3>
           <span className={`tag ${card.type === 'major' ? 'tag-major' : 'tag-minor'}`}
-            style={{ fontSize: '10px', padding: '2px 6px' }}>
+            style={{ fontSize: '10px', padding: '2px 6px' }}
+          >
             {card.type === 'major' ? 'AM' : 'AMen'}
           </span>
         </div>
-        <p className="mono" style={{ fontSize: '11px', marginBottom: '6px' }}>
+        <p className="mono card-desc">
           {card.id} · {card.meaning_up_pt.substring(0, 40)}...
         </p>
       </div>
