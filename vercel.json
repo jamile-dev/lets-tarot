@@ -3,7 +3,10 @@
   "version": 2,
   "outputDirectory": "web/dist",
   "build": {
-    "env": {}
+    "env": {},
+    "command": "cd web && npm ci --legacy-peer-deps --no-audit --no-fund && npm run build",
+    "outputDirectory": "web/dist",
+    "installCommand": "npm install --legacy-peer-deps"
   },
   "rewrites": [
     { "source": "/login", "destination": "/index.html" },
