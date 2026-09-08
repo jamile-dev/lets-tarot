@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import { ApiError, api } from '../services/api'
 import { AuthUser } from '../types'
 
 interface AuthContextType {
@@ -29,37 +30,33 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const login = useCallback(async (email: string, password: string) => {
-    const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/api/v1/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
-    })
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({ error: 'Credenciais inválidas' }))
-      throw new Error(err.error)
+    try {
+      const data = await api.login(email, password)
+      setToken(data.token)
+      setUser(data.user)
+      localStorage.setItem('token', data.token)
+      localStorage.setItem('user', JSON.stringify(data.user))
+    } catch (err) {
+      if (err instanceof ApiError) {
+        throw new Error(err.message)
+      }
+      throw new Error(err instanceof Error ? err.message : 'Credenciais inválidas')
     }
-    const data = await res.json()
-    setToken(data.token)
-    setUser(data.user)
-    localStorage.setItem('token', data.token)
-    localStorage.setItem('user', JSON.stringify(data.user))
   }, [])
 
   const register = useCallback(async (email: string, password: string) => {
-    const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/api/v1/auth/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
-    })
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({ error: 'Erro no registro' }))
-      throw new Error(err.error)
+    try {
+      const data = await api.register(email, password)
+      setToken(data.token)
+      setUser(data.user)
+      localStorage.setItem('token', data.token)
+      localStorage.setItem('user', JSON.stringify(data.user))
+    } catch (err) {
+      if (err instanceof ApiError) {
+        throw new Error(err.message)
+      }
+      throw new Error(err instanceof Error ? err.message : 'Erro ao criar conta')
     }
-    const data = await res.json()
-    setToken(data.token)
-    setUser(data.user)
-    localStorage.setItem('token', data.token)
-    localStorage.setItem('user', JSON.stringify(data.user))
   }, [])
 
   const logout = useCallback(() => {
